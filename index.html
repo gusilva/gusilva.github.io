@@ -6,269 +6,13 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Gustavo Silva – Software Engineer</title>
   <meta name="description" content="Software engineer building accessible, high-performance web experiences." />
-  <!-- Inline CSS (from /static/styles.css) -->
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    /*! tailwindcss v4.1.17 | MIT License | https://tailwindcss.com */
-    @layer properties;
-    @layer theme, base, components, utilities;
-
-    @layer theme {
-
-      :root,
-      :host {
-        --font-sans: Go, Inter, system-ui, sans-serif;
-        --font-mono: "Go Mono", Menlo, ui-monospace, SFMono-Regular, monospace;
-        --color-teal-400: oklch(77.7% 0.152 181.912);
-        --color-blue-500: oklch(62.3% 0.214 259.815);
-        --color-purple-600: oklch(55.8% 0.288 302.321);
-        --color-slate-200: #e2e8f0;
-        --color-slate-400: #94a3b8;
-        --color-slate-500: #64748b;
-        --color-slate-600: #475569;
-        --color-slate-800: #1e293b;
-        --color-slate-900: #0f172a;
-        --color-white: #fff;
-        --spacing: 0.25rem;
-        --container-xs: 20rem;
-        --container-md: 28rem;
-        --container-7xl: 80rem;
-        --text-sm: 0.875rem;
-        --text-sm--line-height: calc(1.25 / 0.875);
-        --text-base: 1rem;
-        --text-base--line-height: calc(1.5 / 1);
-        --text-lg: 1.125rem;
-        --text-lg--line-height: calc(1.75 / 1.125);
-        --text-xl: 1.25rem;
-        --text-xl--line-height: calc(1.75 / 1.25);
-        --text-4xl: 2.25rem;
-        --text-4xl--line-height: calc(2.5 / 2.25);
-        --text-5xl: 3rem;
-        --text-5xl--line-height: 1;
-        --font-weight-medium: 500;
-        --font-weight-bold: 700;
-        --tracking-tight: -0.025em;
-        --tracking-widest: 0.1em;
-        --leading-tight: 1.25;
-        --leading-snug: 1.375;
-        --leading-normal: 1.5;
-        --leading-relaxed: 1.625;
-        --default-transition-duration: 150ms;
-        --default-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-        --default-font-family: var(--font-sans);
-        --default-mono-font-family: var(--font-mono);
-        --breakpoint-md: 48rem;
-        --breakpoint-lg: 64rem;
-        --color-primary: #6366f1;
-        --color-secondary: #14b8a6;
-        --color-tint: #ec4899;
-        --radius-pill: 9999px;
-        --max-w-7xl: 80rem;
-        --bg-page-radials: radial-gradient(circle at 20% 20%, rgba(69, 39, 160, 0.30), transparent 60%), radial-gradient(circle at 80% 60%, rgba(8, 182, 209, 0.20), transparent 55%), radial-gradient(circle at 15% 80%, rgba(255, 122, 0, 0.14), transparent 60%), radial-gradient(circle at 90% 10%, rgba(236, 72, 153, 0.16), transparent 55%), #0a192f;
-      }
-    }
-
-    @layer base {
-
-      *,
-      ::after,
-      ::before,
-      ::backdrop,
-      ::file-selector-button {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-        border: 0 solid;
-      }
-
-      html,
-      :host {
-        line-height: 1.5;
-        -webkit-text-size-adjust: 100%;
-        tab-size: 4;
-        font-family: var(--default-font-family);
-        font-feature-settings: var(--default-font-feature-settings, normal);
-        font-variation-settings: var(--default-font-variation-settings, normal);
-        -webkit-tap-highlight-color: transparent;
-      }
-
-      hr {
-        height: 0;
-        color: inherit;
-        border-top-width: 1px;
-      }
-
-      abbr:where([title]) {
-        -webkit-text-decoration: underline dotted;
-        text-decoration: underline dotted;
-      }
-
-      h1,
-      h2,
-      h3,
-      h4,
-      h5,
-      h6 {
-        font-size: inherit;
-        font-weight: inherit;
-      }
-
-      a {
-        color: inherit;
-        -webkit-text-decoration: inherit;
-        text-decoration: inherit;
-      }
-
-      b,
-      strong {
-        font-weight: bolder;
-      }
-
-      code,
-      kbd,
-      samp,
-      pre {
-        font-family: var(--default-mono-font-family);
-        font-feature-settings: var(--default-mono-font-feature-settings, normal);
-        font-variation-settings: var(--default-mono-font-variation-settings, normal);
-        font-size: 1em;
-      }
-
-      small {
-        font-size: 80%;
-      }
-
-      sub,
-      sup {
-        font-size: 75%;
-        line-height: 0;
-        position: relative;
-        vertical-align: baseline;
-      }
-
-      sub {
-        bottom: -0.25em;
-      }
-
-      sup {
-        top: -0.5em;
-      }
-
-      table {
-        text-indent: 0;
-        border-color: inherit;
-        border-collapse: collapse;
-      }
-
-      :-moz-focusring {
-        outline: auto;
-      }
-
-      progress {
-        vertical-align: baseline;
-      }
-
-      summary {
-        display: list-item;
-      }
-
-      ol,
-      ul,
-      menu {
-        list-style: none;
-      }
-
-      img,
-      svg,
-      video,
-      canvas,
-      audio,
-      iframe,
-      embed,
-      object {
-        display: block;
-        vertical-align: middle;
-      }
-
-      img,
-      video {
-        max-width: 100%;
-        height: auto;
-      }
-
-      button,
-      input,
-      select,
-      optgroup,
-      textarea,
-      ::file-selector-button {
-        font: inherit;
-        font-feature-settings: inherit;
-        font-variation-settings: inherit;
-        letter-spacing: inherit;
-        color: inherit;
-        border-radius: 0;
-        background-color: transparent;
-        opacity: 1;
-      }
-
-      textarea {
-        resize: vertical;
-      }
-
-      ::-webkit-search-decoration {
-        -webkit-appearance: none;
-      }
-
-      ::-webkit-date-and-time-value {
-        min-height: 1lh;
-        text-align: inherit;
-      }
-
-      [hidden]:where(:not([hidden="until-found"])) {
-        display: none !important;
-      }
-    }
-
-    @layer utilities {
-      .sr-only {
-        position: absolute;
-        width: 1px;
-        height: 1px;
-        padding: 0;
-        margin: -1px;
-        overflow: hidden;
-        clip-path: inset(50%);
-        white-space: nowrap;
-        border-width: 0;
-      }
-
-      .scroll-smooth {
-        scroll-behavior: smooth;
-      }
-
-      .object-cover {
-        object-fit: cover;
-      }
-
-      .rounded {
-        border-radius: 0.25rem;
-      }
-
-      .transition {
-        transition-property: color, background-color, border-color, outline-color, text-decoration-color, fill, stroke, --tw-gradient-from, --tw-gradient-via, --tw-gradient-to, opacity, box-shadow, transform, translate, scale, rotate, filter, -webkit-backdrop-filter, backdrop-filter, display, content-visibility, overlay, pointer-events;
-        transition-timing-function: var(--default-transition-timing-function);
-        transition-duration: var(--default-transition-duration);
-      }
-    }
-
-    body {
-      font-family: sans-serif;
-      margin: 0;
-    }
-
+    /* Minimal custom layer */
     @font-face {
       font-family: "Go";
-      src: local("Go Regular"), url("/static/fonts/Go-Regular.ttf") format("ttf");
+      src: local("Go Regular"), url("/static/fonts/Go-Regular.ttf") format("truetype");
       font-weight: 400;
       font-style: normal;
       font-display: swap;
@@ -276,7 +20,7 @@
 
     @font-face {
       font-family: "Go";
-      src: local("Go Bold"), url("/static/fonts/Go-Bold.ttf") format("ttf");
+      src: local("Go Bold"), url("/static/fonts/Go-Bold.ttf") format("truetype");
       font-weight: 700;
       font-style: normal;
       font-display: swap;
@@ -284,220 +28,204 @@
 
     @font-face {
       font-family: "Go Mono";
-      src: local("Go Mono"), url("/static/fonts/Go-Mono.ttf") format("ttf");
+      src: local("Go Mono"), url("/static/fonts/Go-Mono.ttf") format("truetype");
       font-weight: 400;
       font-style: normal;
       font-display: swap;
     }
 
-    ::selection {
-      background: color-mix(in srgb, #ec4899 40%, transparent);
+    :root {
+      --color-primary: #6366f1;
+      --color-secondary: #14b8a6;
+      --color-tint: #ec4899;
+      --color-slate-200: #e2e8f0;
+      --color-slate-400: #94a3b8;
+      --color-slate-500: #64748b;
+      --color-slate-600: #475569;
+      --color-slate-800: #1e293b;
+      --color-slate-900: #0f172a;
+      --radius-pill: 9999px;
+      --bg-page-radials: radial-gradient(circle at 20% 20%, rgba(69, 39, 160, 0.30), transparent 60%), radial-gradient(circle at 80% 60%, rgba(8, 182, 209, 0.20), transparent 55%), radial-gradient(circle at 15% 80%, rgba(255, 122, 0, 0.14), transparent 60%), radial-gradient(circle at 90% 10%, rgba(236, 72, 153, 0.16), transparent 55%), #0a192f;
     }
 
-    @layer components {
-      .page-wrapper {
-        min-height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: var(--bg-page-radials);
-      }
+    ::selection {
+      background: color-mix(in srgb, var(--color-tint) 40%, transparent);
+    }
 
+    .page-wrapper {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg-page-radials);
+    }
+
+    .container-main {
+      margin-inline: auto;
+      max-width: 80rem;
+      padding: 3rem 1.5rem;
+    }
+
+    @media (min-width:48rem) {
       .container-main {
-        margin-inline: auto;
-        max-width: var(--max-w-7xl);
-        padding-inline: 1.5rem;
-        padding-block: 3rem;
+        padding: 4rem 3rem;
       }
+    }
 
-      @media (width >=48rem) {
-        .container-main {
-          padding-inline: 3rem;
-          padding-block: 4rem;
-        }
+    @media (min-width:64rem) {
+      .container-main {
+        padding-block: 0;
       }
+    }
 
-      @media (width >=64rem) {
-        .container-main {
-          padding-block: 0;
-        }
-      }
+    .nav-indicator {
+      margin-right: 1rem;
+      height: 1px;
+      width: 2rem;
+      background-color: var(--color-slate-600);
+      transition: all .15s;
+    }
 
-      .nav-indicator {
-        margin-right: 1rem;
-        height: 1px;
-        width: 2rem;
-        background-color: var(--color-slate-600);
-        transition: all .15s;
-      }
+    .nav-indicator.active,
+    .group:hover .nav-indicator {
+      width: 4rem;
+      background-color: var(--color-slate-200);
+    }
 
-      .nav-indicator.active {
-        width: 4rem;
-        background-color: var(--color-slate-200);
-      }
+    .nav-text {
+      font-size: .75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      color: var(--color-slate-500);
+      transition: color .15s;
+    }
 
-      .group:hover .nav-indicator {
-        width: 4rem;
-        background-color: var(--color-slate-200);
-      }
+    .nav-text.active,
+    .group:hover .nav-text {
+      color: var(--color-slate-200);
+    }
 
-      .nav-text {
-        font-size: .75rem;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: .1em;
-        color: var(--color-slate-500);
-        transition: color .15s;
-      }
+    .tech-pill {
+      display: inline-block;
+      font-size: .75rem;
+      font-family: "Go Mono", monospace;
+      padding: .25rem .75rem;
+      border-radius: var(--radius-pill);
+      background-color: color-mix(in srgb, var(--color-primary) 12%, transparent);
+      color: var(--color-primary);
+    }
 
-      .nav-text.active {
-        color: var(--color-slate-200);
-      }
+    /* Horizontal project card (image left, content right) */
+    .project-card {
+      position: relative;
+      display: block;
+      padding: .5rem;
+      border-radius: .75rem;
+    }
 
-      .group:hover .nav-text {
-        color: var(--color-slate-200);
-      }
+    .project-card-bg {
+      position: absolute;
+      inset: 0;
+      border-radius: .75rem;
+      background: transparent;
+      z-index: 0;
+      opacity: 0;
+      transition: opacity .15s, background .15s;
+      pointer-events: none;
+    }
 
-      .tech-pill {
-        display: inline-block;
-        font-size: .75rem;
-        font-family: var(--font-mono);
-        padding: .25rem .75rem;
-        border-radius: var(--radius-pill);
-        background-color: color-mix(in srgb, #6366f1 12%, transparent);
-        color: var(--color-primary);
-      }
+    .project-card:hover .project-card-bg {
+      opacity: 1;
+      background: linear-gradient(145deg, color-mix(in srgb, var(--color-primary) 35%, var(--color-slate-800)), color-mix(in srgb, var(--color-secondary) 30%, var(--color-slate-900)) 60%);
+    }
 
-      .project-img {
-        border-radius: .375rem;
-        transition: border-color .15s;
-      }
+    .project-img {
+      position: relative;
+      z-index: 1;
+    }
 
-      .group:hover .project-img {
-        border-color: color-mix(in srgb, #e2e8f0 30%, transparent);
-      }
+    .project-img img {
+      display: block;
+      width: 100%;
+      height: 240px;
+      object-fit: cover;
+      border-radius: .5rem;
+    }
 
+    .project-content,
+    .project-card h3,
+    .project-card ul {
+      position: relative;
+      z-index: 1;
+    }
+
+    .project-content {
+      margin-top: 1rem;
+    }
+
+    @media (min-width:40rem) {
       .project-card {
         display: grid;
-        grid-template-columns: 200px 1fr;
-        gap: 1.25rem;
-        position: relative;
-        align-items: start;
-        padding: .5rem;
-        transition: padding .15s;
+        grid-template-columns: 220px 1fr;
+        gap: 1.5rem;
       }
 
-      .project-card:hover {
-        padding: .75rem;
+      .project-img img {
+        height: 100%;
+        min-height: 160px;
       }
 
-      .project-card-bg {
-        position: absolute;
-        inset: 0;
-        border-radius: .75rem;
-        background: transparent;
-        transition: background-color .15s;
-        pointer-events: none;
-        z-index: 0;
+      .project-content {
+        margin-top: 0;
       }
+    }
 
-      .project-content,
-      .project-img,
-      .project-card h3,
-      .project-card ul {
-        position: relative;
-        z-index: 1;
-      }
+    /* Removed hover lift/shadow per spec */
+    .exp-card {
+      position: relative;
+      display: grid;
+      gap: 1rem;
+      padding-bottom: .25rem;
+    }
 
-      .project-card:hover .project-card-bg {
-        background: linear-gradient(145deg, color-mix(in srgb, #6366f1 35%, #1e293b), color-mix(in srgb, #14b8a6 30%, #0f172a) 60%);
-        box-shadow: 0 8px 24px -6px rgba(0, 0, 0, 0.45), 0 0 0 1px color-mix(in srgb, #6366f1 40%, transparent);
-      }
-
-      .project-card:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 6px 20px -4px rgba(0, 0, 0, 0.5);
-      }
-
+    @media (min-width:40rem) {
       .exp-card {
-        position: relative;
-        display: grid;
-        gap: 1rem;
-        padding-bottom: .25rem;
-      }
-
-      @media (width >=40rem) {
-        .exp-card {
-          grid-template-columns: repeat(8, minmax(0, 1fr));
-          gap: 2rem;
-        }
-
-        .exp-header {
-          grid-column: 1 / 3;
-        }
-
-        .exp-content {
-          grid-column: 3 / -1;
-        }
-      }
-
-      @media (width >=48rem) {
-        .exp-card {
-          gap: 1rem;
-        }
-      }
-
-      .exp-card-bg {
-        position: absolute;
-        inset-inline: -1rem;
-        inset-block: -1rem;
-        z-index: 0;
-        display: none;
-        border-radius: .375rem;
-      }
-
-      @media (width >=64rem) {
-        .exp-card-bg {
-          inset-inline: -1.5rem;
-          display: block;
-        }
+        grid-template-columns: repeat(8, minmax(0, 1fr));
+        gap: 2rem;
       }
 
       .exp-header {
-        z-index: 10;
-        margin-top: .25rem;
-        margin-bottom: .5rem;
-        font-size: .75rem;
-        font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: .1em;
-        color: var(--color-slate-500);
+        grid-column: 1/3;
       }
 
       .exp-content {
-        z-index: 10;
+        grid-column: 3/-1;
       }
+    }
 
-      .exp-title {
-        color: var(--color-slate-200);
-        font-weight: 500;
-        font-size: 1rem;
-        line-height: 1.25;
-      }
+    .exp-header {
+      margin-top: .25rem;
+      margin-bottom: .5rem;
+      font-size: .75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      color: var(--color-slate-500);
+    }
 
-      .exp-desc {
-        margin-top: .5rem;
-        font-size: .875rem;
-        line-height: 1.5;
-        color: var(--color-slate-400);
-      }
+    .exp-desc {
+      margin-top: .5rem;
+      font-size: .875rem;
+      line-height: 1.5;
+      color: var(--color-slate-400);
+    }
 
-      .exp-tags {
-        margin-top: .5rem;
-        display: flex;
-        flex-wrap: wrap;
-        gap: .5rem;
-      }
+    .exp-tags {
+      margin-top: .5rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: .5rem;
     }
   </style>
 </head>
@@ -509,25 +237,44 @@
   <div class="container-main">
     <div class="mx-auto min-h-screen max-w-7xl px-6 py-12 font-sans md:px-12 md:py-16 lg:py-0">
       <div class="lg:flex lg:justify-between lg:gap-4">
+        <!-- Left Sidebar -->
         <header class="lg:sticky lg:top-0 lg:flex lg:max-h-screen lg:w-[48%] lg:flex-col lg:justify-between lg:py-24">
           <div>
-            <h1 class="text-4xl font-bold tracking-tight text-slate-200 sm:text-5xl"><a href="/">Gustavo Silva</a></h1>
+            <h1 class="text-4xl font-bold tracking-tight text-slate-200 sm:text-5xl">
+              <a href="/">Gustavo Silva</a>
+            </h1>
             <h2 class="mt-3 text-lg font-medium tracking-tight text-slate-200 sm:text-xl">Software Engineer</h2>
-            <p class="mt-4 max-w-xs leading-normal">Full‑stack engineer (Go/Typescript/React) building observable,
+            <p class="mt-4 max-w-xs leading-normal">Full‑stack engineer (Go/Typescript/React) building
+              observable,
               performant distributed platforms and accessible interfaces.</p>
+            <!-- Navigation -->
             <nav class="nav hidden lg:block" aria-label="In-page jump links">
               <ul class="mt-16 w-max">
-                <li><a class="group flex items-center py-3" href="#about"><span
-                      class="nav-indicator active"></span><span class="nav-text active">About</span></a></li>
-                <li><a class="group flex items-center py-3" href="#experience"><span class="nav-indicator"></span><span
-                      class="nav-text">Experience</span></a></li>
-                <li><a class="group flex items-center py-3" href="#projects"><span class="nav-indicator"></span><span
-                      class="nav-text">Projects</span></a></li>
+                <li>
+                  <a class="group flex items-center py-3" href="#about">
+                    <span class="nav-indicator active"></span>
+                    <span class="nav-text active">About</span>
+                  </a>
+                </li>
+                <li>
+                  <a class="group flex items-center py-3" href="#experience">
+                    <span class="nav-indicator"></span>
+                    <span class="nav-text">Experience</span>
+                  </a>
+                </li>
+                <li>
+                  <a class="group flex items-center py-3" href="#projects">
+                    <span class="nav-indicator"></span>
+                    <span class="nav-text">Projects</span>
+                  </a>
+                </li>
               </ul>
             </nav>
           </div>
         </header>
+        <!-- Main Content -->
         <main id="content" class="pt-24 lg:w-[52%] lg:py-24">
+          <!-- About -->
           <section id="about" class="mb-16 scroll-mt-16 md:mb-24 lg:mb-36 lg:scroll-mt-24" aria-label="About me">
             <div class="section-heading-mobile">
               <h2 class="text-sm font-bold uppercase tracking-widest text-slate-200 lg:sr-only">About</h2>
@@ -537,7 +284,8 @@
                 applications—designing distributed services that stay fast and observable while crafting accessible,
                 performant user interfaces.</p>
               <p class="mb-4">I build high‑throughput APIs and data pipelines in <span
-                  class="font-medium text-slate-200">Go, Java, Python</span>, and shape frontend & mobile experiences
+                  class="font-medium text-slate-200">Go, Java, Python</span>, and shape frontend & mobile
+                experiences
                 with <span class="font-medium text-slate-200">JavaScript/TypeScript, React, and React Native</span>. I
                 care about latency visibility, structured logging, metrics, tracing, and removing operational friction
                 through automation.</p>
@@ -555,6 +303,7 @@
                 Caching · Offline Sync · Feature Flags · Event Pipelines · Accessibility · Performance Optimization.</p>
             </div>
           </section>
+          <!-- Experience -->
           <section id="experience" class="mb-16 scroll-mt-16 md:mb-24 lg:mb-36 lg:scroll-mt-24"
             aria-label="Work experience">
             <div class="section-heading-mobile">
@@ -567,16 +316,20 @@
                     <div class="exp-card-bg"></div>
                     <header class="exp-header" aria-label="2022 to Present">2022 — Present</header>
                     <div class="exp-content">
-                      <h3 class="font-medium leading-snug text-slate-200"><a
-                          class="exp-title inline-flex items-baseline group/link" href="#" target="_blank"
-                          rel="noopener noreferrer" aria-label="Software Engineer at Prosegur"><span>Software Engineer ·
-                            <span class="inline-block">Prosegur</span></span></a></h3>
-                      <p class="exp-desc">In July 2022, I joined the Prosegur team, where I currently work as a software
-                        engineer. My job involves maintaining and developing the integration platform. This includes
-                        fixing bugs, implementing change requests, and adding new features necessary for the system to
-                        function properly. The system I am responsible for maintaining is a critical component of
-                        Prosegur, and my role is to ensure it runs smoothly and efficiently. This platform integrates
-                        the various systems within Prosegur.</p>
+                      <h3 class="font-medium leading-snug text-slate-200">
+                        <a class="exp-title inline-flex items-baseline group/link" href="#" target="_blank"
+                          rel="noopener noreferrer" aria-label="Software Engineer at Prosegur">
+                          <span>Software Engineer · <span class="inline-block">Prosegur</span></span>
+                        </a>
+                      </h3>
+                      <p class="exp-desc">
+                        In July 2022, I joined the Prosegur team, where I currently work as a software engineer. My job
+                        involves maintaining and developing the integration platform. This includes fixing bugs,
+                        implementing change requests, and adding new features necessary for the system to function
+                        properly. The system I am responsible for maintaining is a critical component of Prosegur, and
+                        my role is to ensure it runs smoothly and efficiently. This platform integrates the various
+                        systems within Prosegur.
+                      </p>
                       <ul class="exp-tags" aria-label="Technologies used">
                         <li>
                           <div class="tech-pill">Go</div>
@@ -611,19 +364,23 @@
                     <div class="exp-card-bg"></div>
                     <header class="exp-header" aria-label="2021 to 2022">2021 — 2022</header>
                     <div class="exp-content">
-                      <h3 class="font-medium leading-snug text-slate-200"><a
-                          class="exp-title inline-flex items-baseline group/link" href="#" target="_blank"
-                          rel="noopener noreferrer" aria-label="Mobile Engineer at Mercury Dev"><span>React Native
-                            Developer · <span class="inline-block">Mercury Dev</span></span></a></h3>
-                      <p class="exp-desc">As a Mobile Developer at Mercury Dev, I have the opportunity to work with app
-                        development for different types of industries. In my first few months I participated in the
-                        development of an app aimed for personal trainers, where the goal was to provide users with
-                        personalised training. At first, my tasks were to normalise the components that were already
-                        implemented for iOS and had a different behaviour on Android devices. Then, I contributed to the
-                        development of a download manager, to provide the user with a better user experience. After this
-                        project, I was invited to get into a MVP of a banking credit platform. I'm still working on this
-                        project where they have interesting challenges such as optimising the performance of rendering
-                        components and implementing new features.</p>
+                      <h3 class="font-medium leading-snug text-slate-200">
+                        <a class="exp-title inline-flex items-baseline group/link" href="#" target="_blank"
+                          rel="noopener noreferrer" aria-label="Mobile Engineer at Mercury Dev">
+                          <span>React Native Developer · <span class="inline-block">Mercury Dev</span></span>
+                        </a>
+                      </h3>
+                      <p class="exp-desc">
+                        As a Mobile Developer at Mercury Dev, I have the opportunity to work with app development for
+                        different types of industries. In my first few months I participated in the development of an
+                        app aimed for personal trainers, where the goal was to provide users with personalised training.
+                        At first, my tasks were to normalise the components that were already implemented for iOS and
+                        had a different behaviour on Android devices. Then, I contributed to the development of a
+                        download manager, to provide the user with a better user experience. After this project, I was
+                        invited to get into a MVP of a banking credit platform. I'm still working on this project where
+                        they have interesting challenges such as optimising the performance of rendering components and
+                        implementing new features.
+                      </p>
                       <ul class="exp-tags" aria-label="Technologies used">
                         <li>
                           <div class="tech-pill">React Native</div>
@@ -658,20 +415,23 @@
                     <div class="exp-card-bg"></div>
                     <header class="exp-header" aria-label="2019 to 2021">2019 — 2021</header>
                     <div class="exp-content">
-                      <h3 class="font-medium leading-snug text-slate-200"><a
-                          class="exp-title inline-flex items-baseline group/link" href="#" target="_blank"
-                          rel="noopener noreferrer" aria-label="Full Stack Engineer at Vitasoft"><span>Full Stack
-                            Engineer · <span class="inline-block">Vitasoft</span></span></a></h3>
-                      <p class="exp-desc">I started as Fullstack Developer at Vitasoft, working in the code refactoring.
-                        I was responsible to remove duplicate code in the ReactJs components. I also implemented the
-                        export feature which main goal was to export the table data to excel file. After that, I started
-                        to work on the Java version upgrade. The backend was running with Java 7 and to implement the
-                        future features such as GraphQL, it was necessary to bump the java to version 8. Since the
-                        project structure is build upon modules, this upgraded took some time and a lot of research, to
-                        avoid breaking the other modules. With the upgrade completed, I was responsible to start mapping
-                        Apache Solr indexes to retrieve data from database and send it via GraphQL resolvers. I am
-                        currently working on fetching this data in frontend, with apollo js, and present this data to
-                        the users.</p>
+                      <h3 class="font-medium leading-snug text-slate-200">
+                        <a class="exp-title inline-flex items-baseline group/link" href="#" target="_blank"
+                          rel="noopener noreferrer" aria-label="Full Stack Engineer at Vitasoft">
+                          <span>Full Stack Engineer · <span class="inline-block">Vitasoft</span></span>
+                        </a>
+                      </h3>
+                      <p class="exp-desc">
+                        I started as Fullstack Developer at Vitasoft, working in the code refactoring. I was responsible
+                        to remove duplicate code in the ReactJs components. I also implemented the export feature which
+                        main goal was to export the table data to excel file. After that, I started to work on the Java
+                        version upgrade. The backend was running with Java 7 and to implement the future features such
+                        as GraphQL, it was necessary to bump the java to version 8. Since the project structure is build
+                        upon modules, this upgraded took some time and a lot of research, to avoid breaking the other
+                        modules. With the upgrade completed, I was responsible to start mapping Apache Solr indexes to
+                        retrieve data from database and send it via GraphQL resolvers. I am currently working on
+                        fetching this data in frontend, with apollo js, and present this data to the users.
+                      </p>
                       <ul class="exp-tags" aria-label="Technologies used">
                         <li>
                           <div class="tech-pill">Java</div>
@@ -700,15 +460,19 @@
                     <div class="exp-card-bg"></div>
                     <header class="exp-header" aria-label="2017 to 2019">2017 — 2019</header>
                     <div class="exp-content">
-                      <h3 class="font-medium leading-snug text-slate-200"><a
-                          class="exp-title inline-flex items-baseline group/link" href="#" target="_blank"
-                          rel="noopener noreferrer" aria-label="Automation Engineer at Globo"><span>Automation Engineer
-                            · <span class="inline-block">Globo</span></span></a></h3>
-                      <p class="exp-desc">As an IT specialist at Globo, I was mainly responsible for the technical
-                        support for video editing programs and special effects software. I also take care of media
-                        storage and network connections as well as automation of backup media processes with Python
-                        programming language. My responsibilities also include monitoring network devices, creating
-                        installation instructions, and software configuration.</p>
+                      <h3 class="font-medium leading-snug text-slate-200">
+                        <a class="exp-title inline-flex items-baseline group/link" href="#" target="_blank"
+                          rel="noopener noreferrer" aria-label="Automation Engineer at Globo">
+                          <span>Automation Engineer · <span class="inline-block">Globo</span></span>
+                        </a>
+                      </h3>
+                      <p class="exp-desc">
+                        As an IT specialist at Globo, I was mainly responsible for the technical support for video
+                        editing programs and special effects software. I also take care of media storage and network
+                        connections as well as automation of backup media processes with Python programming language.
+                        My responsibilities also include monitoring network devices, creating installation instructions,
+                        and software configuration.
+                      </p>
                       <ul class="exp-tags" aria-label="Technologies used">
                         <li>
                           <div class="tech-pill">Python</div>
@@ -733,13 +497,16 @@
                   </div>
                 </li>
               </ol>
-              <div class="mt-12"><a
-                  class="inline-flex items-baseline font-medium leading-tight text-slate-200 hover:text-primary group/link text-base"
-                  href="/static/resume.pdf" target="_blank" rel="noopener noreferrer"
-                  aria-label="View Full Résumé"><span>View Full <span class="inline-block">Résumé</span></span></a>
+              <div class="mt-12">
+                <a class="inline-flex items-baseline font-medium leading-tight text-slate-200 hover:text-primary group/link text-base"
+                  href="https://app.getfiledrop.com/share/a74427c0-34f9-454a-b1a0-fe032085b535/download" target="_blank"
+                  rel="noopener noreferrer" aria-label="View Full Résumé">
+                  <span>View Full <span class="inline-block">Résumé</span></span>
+                </a>
               </div>
             </div>
           </section>
+          <!-- Projects -->
           <section id="projects" class="mb-16 scroll-mt-16 md:mb-24 lg:mb-36 lg:scroll-mt-24"
             aria-label="Selected projects">
             <div class="section-heading-mobile">
@@ -747,19 +514,24 @@
             </div>
             <div>
               <ol class="group/list" aria-label="Project list">
+                <!-- Project: Integration Platform -->
                 <li class="mb-12">
-                  <div class="project-card">
+                  <div class="project-card group">
                     <div class="project-card-bg"></div>
-                    <div class="project-img" aria-hidden="true"><img
-                        alt="Integration Platform (Go, Microservices, MongoDB)" loading="lazy" decoding="async"
-                        class="object-cover rounded transition group-hover:border-slate-200/30 sm:order-1 sm:col-span-2 sm:translate-y-1"
-                        src="/static/images/prosegur.png"></div>
+                    <div class="project-img" aria-hidden="true">
+                      <img alt="Integration Platform (Go, Microservices, MongoDB)" loading="lazy" decoding="async"
+                        src="https://i.postimg.cc/VvFWyBRB/prosegur.png">
+                    </div>
                     <div class="project-content">
-                      <h3><a class="project-title group/link inline-flex items-baseline" href="#"
+                      <h3>
+                        <a class="project-title group/link inline-flex items-baseline" href="#"
                           rel="noopener noreferrer" target="_blank"
-                          aria-label="Integration Platform (Go, Microservices, MongoDB)"><span>Integration <span
-                              class="inline-block">Platform</span></span></a></h3>
-                      <p class="project-desc">Mission‑critical microservice platform integrating heterogeneous internal
+                          aria-label="Integration Platform (Go, Microservices, MongoDB)">
+                          <span>Integration <span class="inline-block">Platform</span></span>
+                        </a>
+                      </h3>
+                      <p class="project-desc mt-2 text-sm leading-relaxed text-slate-400">Mission‑critical microservice
+                        platform integrating heterogeneous internal
                         systems, handling transformation, validation, and secure routing of high‑volume transactional
                         messages with observability and progressive delivery guardrails.</p>
                       <ul class="mt-2 flex flex-wrap" aria-label="Technologies used">
@@ -788,19 +560,24 @@
                     </div>
                   </div>
                 </li>
+                <!-- Project: Fitness Training App -->
                 <li class="mb-12">
-                  <div class="project-card">
+                  <div class="project-card group">
                     <div class="project-card-bg"></div>
-                    <div class="project-img" aria-hidden="true"><img
-                        alt="Fitness Training Mobile App (React Native, TypeScript)" loading="lazy" decoding="async"
-                        class="object-cover rounded transition group-hover:border-slate-200/30 sm:order-1 sm:col-span-2 sm:translate-y-1"
-                        src="https://pasteboard.co/DGcgPFbHbLEg.png"></div>
+                    <div class="project-img" aria-hidden="true">
+                      <img alt="Fitness Training Mobile App (React Native, TypeScript)" loading="lazy" decoding="async"
+                        src="https://i.postimg.cc/cJjDTm9C/hyperhuman.png">
+                    </div>
                     <div class="project-content">
-                      <h3><a class="project-title group/link inline-flex items-baseline" href="#"
+                      <h3>
+                        <a class="project-title group/link inline-flex items-baseline" href="#"
                           rel="noopener noreferrer" target="_blank"
-                          aria-label="Fitness Training Mobile App (React Native, TypeScript)"><span>Fitness Training
-                            <span class="inline-block">App</span></span></a></h3>
-                      <p class="project-desc">Cross‑platform React Native application delivering personalized workout
+                          aria-label="Fitness Training Mobile App (React Native, TypeScript)">
+                          <span>Fitness Training <span class="inline-block">App</span></span>
+                        </a>
+                      </h3>
+                      <p class="project-desc mt-2 text-sm leading-relaxed text-slate-400">Cross‑platform React Native
+                        application delivering personalized workout
                         programming, offline media download management, and adaptive UI components normalized across
                         iOS/Android rendering differences.</p>
                       <ul class="mt-2 flex flex-wrap" aria-label="Technologies used">
@@ -829,20 +606,24 @@
                     </div>
                   </div>
                 </li>
+                <!-- Project: Credit Platform MVP -->
                 <li class="mb-12">
-                  <div class="project-card">
+                  <div class="project-card group">
                     <div class="project-card-bg"></div>
-                    <div class="project-img" aria-hidden="true"><img
-                        alt="Credit Platform MVP (React Native, Performance Optimization)" loading="lazy"
-                        decoding="async"
-                        class="object-cover rounded transition group-hover:border-slate-200/30 sm:order-1 sm:col-span-2 sm:translate-y-1"
-                        src="/static/images/share-one.png"></div>
+                    <div class="project-img" aria-hidden="true">
+                      <img alt="Credit Platform MVP (React Native, Performance Optimization)" loading="lazy"
+                        decoding="async" src="https://i.postimg.cc/htvbwm7n/share-one.png">
+                    </div>
                     <div class="project-content">
-                      <h3><a class="project-title group/link inline-flex items-baseline" href="#"
+                      <h3>
+                        <a class="project-title group/link inline-flex items-baseline" href="#"
                           rel="noopener noreferrer" target="_blank"
-                          aria-label="Credit Platform MVP (React Native, Performance Optimization)"><span>Credit
-                            Platform <span class="inline-block">MVP</span></span></a></h3>
-                      <p class="project-desc">Early‑stage mobile banking product focusing on performant rendering of
+                          aria-label="Credit Platform MVP (React Native, Performance Optimization)">
+                          <span>Credit Platform <span class="inline-block">MVP</span></span>
+                        </a>
+                      </h3>
+                      <p class="project-desc mt-2 text-sm leading-relaxed text-slate-400">Early‑stage mobile banking
+                        product focusing on performant rendering of
                         credit workflows, optimized state management, and secure feature rollout under evolving
                         regulatory requirements.</p>
                       <ul class="mt-2 flex flex-wrap" aria-label="Technologies used">
@@ -862,19 +643,24 @@
                     </div>
                   </div>
                 </li>
+                <!-- Project: Search & Export Module -->
                 <li class="mb-12">
-                  <div class="project-card">
+                  <div class="project-card group">
                     <div class="project-card-bg"></div>
-                    <div class="project-img" aria-hidden="true"><img
-                        alt="Search & Export Module (Java, React, GraphQL, Solr)" loading="lazy" decoding="async"
-                        class="object-cover rounded transition group-hover:border-slate-200/30 sm:order-1 sm:col-span-2 sm:translate-y-1"
-                        src="/static/images/vitasoft.png"></div>
+                    <div class="project-img " aria-hidden="true">
+                      <img alt="Search & Export Module (Java, React, GraphQL, Solr)" loading="lazy" decoding="async"
+                        src="https://i.postimg.cc/v8vrZhrc/vitasoft.png">
+                    </div>
                     <div class="project-content">
-                      <h3><a class="project-title group/link inline-flex items-baseline" href="#"
+                      <h3>
+                        <a class="project-title group/link inline-flex items-baseline" href="#"
                           rel="noopener noreferrer" target="_blank"
-                          aria-label="Search & Export Module (Java, React, GraphQL, Solr)"><span>Search & Export <span
-                              class="inline-block">Module</span></span></a></h3>
-                      <p class="project-desc">Enterprise data module refactored for reuse, enabling indexed search via
+                          aria-label="Search & Export Module (Java, React, GraphQL, Solr)">
+                          <span>Search & Export <span class="inline-block">Module</span></span>
+                        </a>
+                      </h3>
+                      <p class="project-desc mt-2 text-sm leading-relaxed text-slate-400">Enterprise data module
+                        refactored for reuse, enabling indexed search via
                         Solr and Excel export workflows through GraphQL resolvers and Apollo client integration.</p>
                       <ul class="mt-2 flex flex-wrap" aria-label="Technologies used">
                         <li class="mr-1.5 mt-2">
@@ -899,20 +685,24 @@
                     </div>
                   </div>
                 </li>
+                <!-- Project: Doctor Consultations App -->
                 <li class="mb-12">
-                  <div class="project-card">
+                  <div class="project-card group">
                     <div class="project-card-bg"></div>
-                    <div class="project-img" aria-hidden="true"><img
-                        alt="Doctor Consultations App (React Native, Telemedicine)" loading="lazy" decoding="async"
-                        class="object-cover rounded transition group-hover:border-slate-200/30 sm:order-1 sm:col-span-2 sm:translate-y-1"
-                        src="/static/images/medik.png"></div>
+                    <div class="project-img" aria-hidden="true">
+                      <img alt="Doctor Consultations App (React Native, Telemedicine)" loading="lazy" decoding="async"
+                        src="https://i.postimg.cc/NMq65PCY/medik.png">
+                    </div>
                     <div class="project-content">
-                      <h3><a class="project-title group/link inline-flex items-baseline"
+                      <h3>
+                        <a class="project-title group/link inline-flex items-baseline"
                           href="https://bokus.ru/projects/chastnaya-klinika-medik/" rel="noopener noreferrer"
-                          target="_blank"
-                          aria-label="Doctor Consultations App (React Native, Telemedicine)"><span>Doctor Consultations
-                            <span class="inline-block">App</span></span></a></h3>
-                      <p class="project-desc">React Native telemedicine application enabling patients to schedule and
+                          target="_blank" aria-label="Doctor Consultations App (React Native, Telemedicine)">
+                          <span>Doctor Consultations <span class="inline-block">App</span></span>
+                        </a>
+                      </h3>
+                      <p class="project-desc mt-2 text-sm leading-relaxed text-slate-400">React Native telemedicine
+                        application enabling patients to schedule and
                         attend remote consultations with doctors, manage medical records, and receive real‑time
                         notifications for upcoming appointments and follow‑ups.</p>
                       <ul class="mt-2 flex flex-wrap" aria-label="Technologies used">
