@@ -1,0 +1,18 @@
+<svg viewBox="0 0 400 180" xmlns="http://www.w3.org/2000/svg" width="400" height="180">
+  <rect width="400" height="180" fill="oklch(14% 0.004 49.25)"/>
+  <rect x="148" y="12"  width="104" height="156" rx="14" fill="oklch(21% 0.006 56.043)" stroke="oklch(84.955% 0 0 / 0.15)" stroke-width="1.5"/>
+  <rect x="148" y="12"  width="104" height="24"  rx="14" fill="oklch(84.955% 0 0 / 0.05)"/>
+  <circle cx="200" cy="24" r="3" fill="oklch(84.955% 0 0 / 0.2)"/>
+  <rect x="162" y="48"  width="76" height="46" rx="6" fill="oklch(77.48% 0.204 60.62 / 0.2)" stroke="oklch(77.48% 0.204 60.62 / 0.5)" stroke-width="1"/>
+  <rect x="162" y="48"  width="76" height="14" rx="6" fill="oklch(77.48% 0.204 60.62 / 0.3)"/>
+  <rect x="168" y="68"  width="20" height="4"  rx="2" fill="oklch(77.48% 0.204 60.62 / 0.6)"/>
+  <rect x="168" y="75"  width="36" height="3"  rx="1.5" fill="oklch(77.48% 0.204 60.62 / 0.3)"/>
+  <circle cx="228" cy="71" r="7" fill="oklch(77.48% 0.204 60.62 / 0.3)" stroke="oklch(77.48% 0.204 60.62)" stroke-width="1"/>
+  <rect x="162" y="104" width="76" height="8"  rx="3" fill="oklch(84.955% 0 0 / 0.08)"/>
+  <rect x="162" y="117" width="50" height="5"  rx="2.5" fill="oklch(84.955% 0 0 / 0.05)"/>
+  <rect x="168" y="130" width="64" height="18" rx="6" fill="oklch(77.48% 0.204 60.62)"/>
+  <text x="200" y="143" text-anchor="middle" fill="oklch(19% 0.004 196.779)" font-size="8" font-family="DM Sans,sans-serif" font-weight="600">APPLY NOW</text>
+  <rect x="185" y="156" width="30" height="3"  rx="1.5" fill="oklch(84.955% 0 0 / 0.2)"/>
+  <circle cx="60"  cy="60"  r="40" fill="oklch(77.48% 0.204 60.62 / 0.04)" stroke="oklch(77.48% 0.204 60.62 / 0.08)" stroke-width="1"/>
+  <circle cx="340" cy="120" r="30" fill="oklch(75% 0.15 305.03 / 0.04)" stroke="oklch(75% 0.15 305.03 / 0.1)" stroke-width="1"/>
+</svg>

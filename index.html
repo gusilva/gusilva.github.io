@@ -1,776 +1,1240 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Gustavo Silva – Software Engineer</title>
-  <meta name="description" content="Software engineer building accessible, high-performance web experiences." />
-  <!-- Golang Font CDN -->
-  <link href="https://fonts.cdnfonts.com/css/golang" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gustavo Silva — Software Engineer</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=JetBrains+Mono:wght@400;500&display=swap"
+    rel="stylesheet" />
+
+  <!-- Devicons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/devicon.min.css" />
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Alpine.js -->
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3/dist/cdn.min.js"></script>
+
+  <!-- marked.js -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+  <script>
+    // Tailwind theme — mirrors the existing CSS variable palette
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            syne: ['Syne', 'sans-serif'],
+            dm: ['DM Sans', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          colors: {
+            base: {
+              100: 'oklch(21% 0.006 56.043)',
+              200: 'oklch(14% 0.004 49.25)',
+              300: 'oklch(0% 0 0)',
+            },
+          },
+        },
+      },
+    };
+  </script>
+
   <style>
-    /* Minimal custom layer */
-    @font-face {
-      font-family: 'Go';
-      font-style: normal;
-      font-weight: 400;
-      src: local('Go'), url('https://fonts.cdnfonts.com/s/19893/Go-Regular.woff') format('woff');
-    }
-
-    @font-face {
-      font-family: 'Go';
-      font-style: italic;
-      font-weight: 400;
-      src: local('Go'), url('https://fonts.cdnfonts.com/s/19893/Go-Italic.woff') format('woff');
-    }
-
-    @font-face {
-      font-family: 'Go';
-      font-style: normal;
-      font-weight: 600;
-      src: local('Go'), url('https://fonts.cdnfonts.com/s/19893/Go-Bold-Italic.woff') format('woff');
-    }
-
-    @font-face {
-      font-family: 'Go';
-      font-style: normal;
-      font-weight: 600;
-      src: local('Go'), url('https://fonts.cdnfonts.com/s/19893/Go-Bold.woff') format('woff');
-    }
-
-    @font-face {
-      font-family: 'Go Medium';
-      font-style: normal;
-      font-weight: 500;
-      src: local('Go Medium'), url('https://fonts.cdnfonts.com/s/19893/Go-Medium.woff') format('woff');
-    }
-
-    @font-face {
-      font-family: 'Go Medium';
-      font-style: italic;
-      font-weight: 500;
-      src: local('Go Medium'), url('https://fonts.cdnfonts.com/s/19893/Go-Medium-Italic.woff') format('woff');
-    }
-
+    /* ── CSS Variables (palette) ─────────────────────────────────── */
     :root {
-      --color-primary: #6366f1;
-      --color-secondary: #14b8a6;
-      --color-tint: #ec4899;
-      --color-slate-200: #e2e8f0;
-      --color-slate-400: #94a3b8;
-      --color-slate-500: #64748b;
-      --color-slate-600: #475569;
-      --color-slate-800: #1e293b;
-      --color-slate-900: #0f172a;
-      --radius-pill: 9999px;
-      --bg-page-radials: radial-gradient(circle at 20% 20%, rgba(69, 39, 160, 0.30), transparent 60%), radial-gradient(circle at 80% 60%, rgba(8, 182, 209, 0.20), transparent 55%), radial-gradient(circle at 15% 80%, rgba(255, 122, 0, 0.14), transparent 60%), radial-gradient(circle at 90% 10%, rgba(236, 72, 153, 0.16), transparent 55%), #0a192f;
+      --base-100: oklch(21% 0.006 56.043);
+      --base-200: oklch(14% 0.004 49.25);
+      --base-300: oklch(0% 0 0);
+      --base-content: oklch(84.955% 0 0);
+      --primary: oklch(77.48% 0.204 60.62);
+      --primary-dim: oklch(77.48% 0.204 60.62 / 0.15);
+      --secondary: oklch(45.98% 0.248 305.03);
+      --secondary-dim: oklch(45.98% 0.248 305.03 / 0.15);
+      --accent: oklch(64.8% 0.223 136.073);
+      --accent-dim: oklch(64.8% 0.223 136.073 / 0.15);
+      --neutral: oklch(24.371% 0.046 65.681);
+      --neutral-content: oklch(84.874% 0.009 65.681);
+      --muted: oklch(84.955% 0 0 / 0.45);
+      --border: oklch(84.955% 0 0 / 0.08);
+    }
+
+    /* ── Base resets ─────────────────────────────────────────────── */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--base-100);
+      color: var(--base-content);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
     }
 
     ::selection {
-      background: color-mix(in srgb, var(--color-tint) 40%, transparent);
+      background: var(--primary-dim);
+      color: var(--primary);
     }
 
-    .page-wrapper {
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--base-200);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--neutral);
+      border-radius: 3px;
+    }
+
+    /* ── Layout grid ─────────────────────────────────────────────── */
+    .portfolio-grid {
+      width: 100%;
+      max-width: 1100px;
+      min-height: 100vh;
+      margin: 0 auto;
+      padding: 0 48px;
+      display: grid;
+      grid-template-columns: 380px 1fr;
+      gap: 80px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .portfolio-sidebar {
+      position: sticky;
+      top: 0;
+      min-width: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding-top: 80px;
+      padding-bottom: 48px;
+    }
+
+    .portfolio-main {
+      min-width: 0;
       min-height: 100vh;
       display: flex;
+      flex-direction: column;
+      padding-top: 80px;
+      padding-bottom: 48px;
+    }
+
+    .portfolio-footer {
+      margin-top: auto;
+    }
+
+    /* ── Mobile header ───────────────────────────────────────────── */
+    .mobile-header {
+      display: none;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: oklch(21% 0.006 56.043 / 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 24px;
+    }
+
+    .mobile-header-top {
+      display: flex;
       align-items: center;
-      justify-content: center;
-      background: var(--bg-page-radials);
+      justify-content: space-between;
+      margin-bottom: 10px;
     }
 
-    .container-main {
-      margin-inline: auto;
-      max-width: 80rem;
-      padding: 3rem 1.5rem;
+    .nav {
+      width: 320px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
     }
 
-    @media (min-width:48rem) {
-      .container-main {
-        padding: 4rem 3rem;
-      }
-    }
-
-    @media (min-width:64rem) {
-      .container-main {
-        padding-block: 0;
-      }
-    }
-
-    .nav-indicator {
-      margin-right: 1rem;
-      height: 1px;
-      width: 2rem;
-      background-color: var(--color-slate-600);
-      transition: all .15s;
-    }
-
-    .nav-indicator.active,
-    .group:hover .nav-indicator {
-      width: 4rem;
-      background-color: var(--color-slate-200);
-    }
-
-    .nav-text {
-      font-size: .75rem;
-      font-weight: 700;
+    .nav-eyebrow {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 11px;
+      letter-spacing: 0.15em;
       text-transform: uppercase;
-      letter-spacing: .1em;
-      color: var(--color-slate-500);
-      transition: color .15s;
+      color: var(--primary);
+      margin-bottom: 18px;
     }
 
-    .nav-text.active,
-    .group:hover .nav-text {
-      color: var(--color-slate-200);
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      width: 100%;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px 0;
+      text-align: left;
+      color: var(--muted);
+      font-family: 'Syne', sans-serif;
+      font-weight: 500;
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.2s;
     }
 
-    .tech-pill {
+    .nav-item:hover {
+      color: var(--base-content);
+    }
+
+    .nav-item .nav-line {
+      height: 1px;
+      width: 16px;
+      flex-shrink: 0;
+      background: var(--muted);
+      transition: width 0.3s, background 0.3s;
+    }
+
+    .nav-item[aria-current="true"] {
+      color: var(--base-content);
+      font-weight: 700;
+    }
+
+    .nav-item[aria-current="true"] .nav-line {
+      width: 40px;
+      background: var(--primary);
+    }
+
+    .nav-mobile {
+      display: flex;
+      gap: 0;
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-mobile::-webkit-scrollbar {
+      display: none;
+    }
+
+    .nav-mobile .nav-item {
+      width: auto;
+      flex-shrink: 0;
+      padding: 6px 14px;
+      font-size: 12px;
+      border-bottom: 2px solid transparent;
+    }
+
+    .nav-mobile .nav-item .nav-line {
+      display: none;
+    }
+
+    .nav-mobile .nav-item[aria-current="true"] {
+      color: var(--primary);
+      border-bottom-color: var(--primary);
+    }
+
+    .name-role-copy {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      max-width: 300px;
+      min-height: calc(1.75em * 2);
+      font-size: 14px;
+      line-height: 1.75;
+      color: var(--muted);
+    }
+
+    .typewriter-slot {
+      display: inline-flex;
+      align-items: baseline;
+      min-height: 1.75em;
+      color: var(--primary);
+      white-space: nowrap;
+    }
+
+    /* ── Animations ──────────────────────────────────────────────── */
+    @keyframes blink {
+
+      0%,
+      100% {
+        opacity: 1
+      }
+
+      50% {
+        opacity: 0
+      }
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(16px)
+      }
+
+      to {
+        opacity: 1;
+        transform: none
+      }
+    }
+
+    .fade-up {
+      animation: fadeUp 0.6s ease both;
+    }
+
+    .blink {
+      animation: blink 1s step-end infinite;
+    }
+
+    .blink-pulse {
+      animation: blink 2s ease-in-out infinite;
+    }
+
+    /* ── Responsive breakpoints ──────────────────────────────────── */
+    @media (max-width: 1099px) {
+      .portfolio-grid {
+        grid-template-columns: 280px 1fr;
+        gap: 48px;
+        padding: 0 32px;
+      }
+    }
+
+    @media (max-width: 767px) {
+      .portfolio-grid {
+        display: block;
+        padding: 0;
+      }
+
+      .portfolio-sidebar {
+        display: none;
+      }
+
+      .portfolio-main {
+        padding: 24px 20px 80px;
+      }
+
+      .mobile-header {
+        display: block;
+      }
+
+      .skills-grid {
+        grid-template-columns: 1fr !important;
+      }
+
+      .project-main-image-shell {
+        padding: 20px 20px 0;
+      }
+    }
+
+    /* ── Tag pill ────────────────────────────────────────────────── */
+    .tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 500;
+      padding: 3px 10px;
+      border-radius: 999px;
+      letter-spacing: 0.02em;
+      white-space: nowrap;
       display: inline-block;
-      font-size: .75rem;
-      font-family: "Go Medium", monospace;
-      padding: .25rem .75rem;
-      border-radius: var(--radius-pill);
-      background-color: color-mix(in srgb, var(--color-primary) 12%, transparent);
-      color: var(--color-primary);
     }
 
-    /* Horizontal project card (image left, content right) */
+    .tag-primary {
+      background: var(--primary-dim);
+      color: var(--primary);
+      border: 1px solid oklch(77.48% 0.204 60.62 / 0.3);
+    }
+
+    .tag-secondary {
+      background: var(--secondary-dim);
+      color: oklch(75% 0.15 305.03);
+      border: 1px solid oklch(55.98% 0.248 305.03 / 0.3);
+    }
+
+    .tag-accent {
+      background: var(--accent-dim);
+      color: var(--accent);
+      border: 1px solid oklch(64.8% 0.223 136.073 / 0.3);
+    }
+
+    /* ── Experience card hover ───────────────────────────────────── */
+    .exp-card {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 20px;
+      padding: 20px;
+      border-radius: 12px;
+      cursor: default;
+      transition: background 0.2s, transform 0.2s, border-color 0.2s;
+      border: 1px solid transparent;
+    }
+
+    .exp-card:hover {
+      background: oklch(84.955% 0 0 / 0.03);
+      transform: translateX(4px);
+      border-color: var(--border);
+    }
+
+    @media (max-width: 767px) {
+      .exp-card {
+        grid-template-columns: 1fr;
+        gap: 6px;
+      }
+    }
+
+    /* ── Project card ────────────────────────────────────────────── */
     .project-card {
-      position: relative;
-      display: block;
-      padding: .5rem;
-      border-radius: .75rem;
+      width: 100%;
+      max-width: 100%;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: var(--base-200);
+      overflow: hidden;
     }
 
-    .project-card-bg {
-      position: absolute;
-      inset: 0;
-      border-radius: .75rem;
-      background: transparent;
-      z-index: 0;
-      opacity: 0;
-      transition: opacity .15s, background .15s;
+    .project-main-image-shell {
+      display: flex;
+      justify-content: center;
+      padding: 24px 24px 0;
+    }
+
+    .project-main-image-frame {
+      width: min(100%, 720px);
+      height: 220px;
+      overflow: hidden;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: var(--base-100);
+    }
+
+    .project-main-image {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-position: center;
       pointer-events: none;
     }
 
-    .project-card:hover .project-card-bg {
-      opacity: 1;
-      background: linear-gradient(145deg, color-mix(in srgb, var(--color-primary) 35%, var(--color-slate-800)), color-mix(in srgb, var(--color-secondary) 30%, var(--color-slate-900)) 60%);
-    }
-
-    .project-img {
-      position: relative;
-      z-index: 1;
-    }
-
-    .project-img img {
-      display: block;
-      width: 100%;
-      height: 240px;
-      object-fit: cover;
-      border-radius: .5rem;
-    }
-
-    .project-content,
-    .project-card h3,
-    .project-card ul {
-      position: relative;
-      z-index: 1;
-    }
-
-    .project-content {
-      margin-top: 1rem;
-    }
-
-    @media (min-width:40rem) {
-      .project-card {
-        display: grid;
-        grid-template-columns: 220px 1fr;
-        gap: 1.5rem;
-      }
-
-      .project-img img {
-        height: 100%;
-        min-height: 160px;
-      }
-
-      .project-content {
-        margin-top: 0;
-      }
-    }
-
-    /* Removed hover lift/shadow per spec */
-    .exp-card {
-      position: relative;
+    /* Portrait layout: tall image on the left, title/links top-right, description bottom-right */
+    .project-card.is-portrait {
       display: grid;
-      gap: 1rem;
-      padding-bottom: .25rem;
+      grid-template-columns: 260px 1fr;
+      grid-template-rows: auto 1fr;
+      gap: 16px;
+      padding: 24px;
     }
 
-    @media (min-width:40rem) {
-      .exp-card {
-        grid-template-columns: repeat(8, minmax(0, 1fr));
-        gap: 2rem;
+    .project-card.is-portrait .project-main-image-shell {
+      grid-column: 1;
+      grid-row: 1 / span 2;
+      padding: 0;
+    }
+
+    .project-card.is-portrait .project-main-image-frame {
+      width: 100%;
+      height: 520px;
+      border: none;
+    }
+
+    .project-card.is-portrait .project-main-image {
+      object-fit: cover;
+      object-position: top;
+    }
+
+    .project-card.is-portrait .project-content {
+      display: contents;
+    }
+
+    .project-card.is-portrait .project-head,
+    .project-card.is-portrait .project-desc {
+      grid-column: 2;
+      padding: 20px 22px;
+      margin: 0 !important;
+    }
+
+    .project-card.is-portrait .project-head {
+      grid-row: 1;
+      align-items: center !important;
+      gap: 16px;
+    }
+
+    .project-card.is-portrait .project-desc {
+      grid-row: 2;
+    }
+
+    @media (max-width: 767px) {
+      .project-card.is-portrait {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        padding: 16px;
       }
 
-      .exp-header {
-        grid-column: 1/3;
+      .project-card.is-portrait .project-main-image-shell,
+      .project-card.is-portrait .project-head,
+      .project-card.is-portrait .project-desc {
+        grid-column: 1;
+        grid-row: auto;
       }
 
-      .exp-content {
-        grid-column: 3/-1;
+      .project-card.is-portrait .project-main-image-frame {
+        width: 220px;
+        height: 440px;
+        margin: 0 auto;
       }
     }
 
-    .exp-header {
-      margin-top: .25rem;
-      margin-bottom: .5rem;
-      font-size: .75rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: .1em;
-      color: var(--color-slate-500);
+    .project-thumb-btn {
+      flex-shrink: 0;
+      width: 88px;
+      height: 52px;
+      border-radius: 8px;
+      overflow: hidden;
+      cursor: pointer;
+      padding: 0;
+      background: none;
+      transition: opacity 0.2s, border-color 0.2s;
     }
 
-    .exp-desc {
-      margin-top: .5rem;
-      font-size: .875rem;
-      line-height: 1.5;
-      color: var(--color-slate-400);
-    }
-
-    .exp-tags {
-      margin-top: .5rem;
+    .project-thumbs {
       display: flex;
-      flex-wrap: wrap;
-      gap: .5rem;
+      gap: 10px;
+      margin-top: 16px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+      scrollbar-width: thin;
+      scrollbar-color: oklch(84.955% 0 0 / 0.22) transparent;
     }
 
-    .font-content {
-      font-family: 'Go', 'Go Medium', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    .project-thumbs::-webkit-scrollbar {
+      height: 4px;
+    }
+
+    .project-thumbs::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .project-thumbs::-webkit-scrollbar-thumb {
+      background: oklch(84.955% 0 0 / 0.22);
+      border-radius: 999px;
+    }
+
+    .project-thumbs::-webkit-scrollbar-thumb:hover {
+      background: oklch(84.955% 0 0 / 0.32);
+    }
+
+    /* ── Prose from marked.js ────────────────────────────────────── */
+    .prose-bio p {
+      margin-bottom: 1em;
+    }
+
+    .prose-bio p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* ── Section label ───────────────────────────────────────────── */
+    .section-label {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+
+    .section-label span {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--primary);
+    }
+
+    .section-label hr {
+      flex: 1;
+      height: 1px;
+      border: none;
+      background: var(--border);
     }
   </style>
-  <!-- Tailwind CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body class="page-wrapper font-content text-slate-400 antialiased leading-relaxed">
-  <a href="#content"
-    class="sr-only focus:not-sr-only focus:absolute focus:top-0 left-0 z-50 px-4 py-3 text-sm font-bold uppercase tracking-widest bg-linear-to-br from-teal-400 via-blue-500 to-purple-600 text-white rounded">Skip
-    to Content</a>
-  <div class="container-main">
-    <div class="mx-auto min-h-screen max-w-7xl px-6 py-12 font-body md:px-12 md:py-16 lg:py-0">
-      <div class="lg:flex lg:justify-between lg:gap-4">
-        <!-- Left Sidebar -->
-        <header class="lg:sticky lg:top-0 lg:flex lg:max-h-screen lg:w-[48%] lg:flex-col lg:justify-between lg:py-24">
-          <div>
-            <h1 class="text-4xl font-content tracking-tight text-slate-200 sm:text-5xl">
-              <a href="/">Gustavo Silva</a>
-            </h1>
-            <h2 class="mt-3 text-lg font-medium tracking-tight text-slate-200 sm:text-xl">Software Engineer</h2>
-            <p class="mt-4 max-w-xs leading-normal">Full‑stack engineer (Go/Typescript/React) building
-              observable,
-              performant distributed platforms and accessible interfaces.</p>
-            <!-- Navigation -->
-            <nav class="nav hidden lg:block" aria-label="In-page jump links">
-              <ul class="mt-16 w-max">
-                <li>
-                  <a class="group flex items-center py-3" href="#about">
-                    <span class="nav-indicator active"></span>
-                    <span class="nav-text active">About</span>
-                  </a>
-                </li>
-                <li>
-                  <a class="group flex items-center py-3" href="#experience">
-                    <span class="nav-indicator"></span>
-                    <span class="nav-text">Experience</span>
-                  </a>
-                </li>
-                <li>
-                  <a class="group flex items-center py-3" href="#projects">
-                    <span class="nav-indicator"></span>
-                    <span class="nav-text">Projects</span>
-                  </a>
-                </li>
-              </ul>
-            </nav>
-          </div>
-        </header>
-        <!-- Main Content -->
-        <main id="content" class="pt-24 lg:w-[52%] lg:py-24">
-          <!-- About -->
-          <section id="about" class="mb-16 scroll-mt-16 md:mb-24 lg:mb-36 lg:scroll-mt-24" aria-label="About me">
-            <div class="section-heading-mobile">
-              <h2 class="text-sm font-bold uppercase tracking-widest text-slate-200 lg:sr-only">About</h2>
-            </div>
-            <div>
-              <p class="mb-4">I’m a full‑stack engineer working across backend platforms, web frontends, and mobile
-                applications—designing distributed services that stay fast and observable while crafting accessible,
-                performant user interfaces.</p>
-              <p class="mb-4">I build high‑throughput APIs and data pipelines in <span
-                  class="font-medium text-slate-200">Go, Java, Python</span>, and shape frontend & mobile
-                experiences
-                with <span class="font-medium text-slate-200">JavaScript/TypeScript, React, and React Native</span>. I
-                care about latency visibility, structured logging, metrics, tracing, and removing operational friction
-                through automation.</p>
-              <p class="mb-4">My background spans industrial / physical security systems, enterprise networking (Cisco,
-                ACI), and modern cloud-native stacks using <span class="font-medium text-slate-200">Kubernetes, Azure,
-                  AWS, Terraform</span>—integrated with data & messaging technologies like <span
-                  class="font-medium text-slate-200">PostgreSQL, MongoDB, Redis, Solr, Kafka, gRPC, GraphQL</span>.</p>
-              <p class="mb-4">On the interface side I’ve contributed to component systems, accessibility compliance,
-                rendering performance, and mobile feature delivery—optimizing data usage, caching, and perceived
-                responsiveness. I value clear contracts, design tokens, and evolution strategies that let teams ship
-                confidently.</p>
-              <p class="mb-4 text-sm text-slate-500">Stack snapshot: Go · Java · Python · JavaScript · TypeScript ·
-                React · React Native · PostgreSQL · MongoDB · Redis · Solr · Kafka · gRPC · GraphQL · REST · Kubernetes
-                · Azure · AWS · Terraform · Cisco ACI · CI/CD · Observability (Grafana, tracing, structured logging) ·
-                Caching · Offline Sync · Feature Flags · Event Pipelines · Accessibility · Performance Optimization.</p>
-            </div>
-          </section>
-          <!-- Experience -->
-          <section id="experience" class="mb-16 scroll-mt-16 md:mb-24 lg:mb-36 lg:scroll-mt-24"
-            aria-label="Work experience">
-            <div class="section-heading-mobile">
-              <h2 class="text-sm font-bold uppercase tracking-widest text-slate-200 lg:sr-only">Experience</h2>
-            </div>
-            <div>
-              <ol class="group/list">
-                <li class="mb-12">
-                  <div class="exp-card">
-                    <div class="exp-card-bg"></div>
-                    <header class="exp-header" aria-label="2022 to Present">2022 — Present</header>
-                    <div class="exp-content">
-                      <h3 class="font-medium leading-snug text-slate-200">
-                        <a class="exp-title inline-flex items-baseline group/link" href="#" target="_blank"
-                          rel="noopener noreferrer" aria-label="Software Engineer at Prosegur">
-                          <span>Software Engineer · <span class="inline-block">Prosegur</span></span>
-                        </a>
-                      </h3>
-                      <p class="exp-desc">
-                        In July 2022, I joined the Prosegur team, where I currently work as a software engineer. My job
-                        involves maintaining and developing the integration platform. This includes fixing bugs,
-                        implementing change requests, and adding new features necessary for the system to function
-                        properly. The system I am responsible for maintaining is a critical component of Prosegur, and
-                        my role is to ensure it runs smoothly and efficiently. This platform integrates the various
-                        systems within Prosegur.
-                      </p>
-                      <ul class="exp-tags" aria-label="Technologies used">
-                        <li>
-                          <div class="tech-pill">Go</div>
-                        </li>
-                        <li>
-                          <div class="tech-pill">Microservices</div>
-                        </li>
-                        <li>
-                          <div class="tech-pill">MongoDB</div>
-                        </li>
-                        <li>
-                          <div class="tech-pill">Kubernetes</div>
-                        </li>
-                        <li>
-                          <div class="tech-pill">Docker</div>
-                        </li>
-                        <li>
-                          <div class="tech-pill">Azure</div>
-                        </li>
-                        <li>
-                          <div class="tech-pill">REST API</div>
-                        </li>
-                        <li>
-                          <div class="tech-pill">SOAP</div>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </li>
-                <li class="mb-12">
-                  <div class="exp-card">
-                    <div class="exp-card-bg"></div>
-                    <header class="exp-header" aria-label="2021 to 2022">2021 — 2022</header>
-                    <div class="exp-content">
-                      <h3 class="font-medium leading-snug text-slate-200">
-                        <a class="exp-title inline-flex items-baseline group/link" href="#" target="_blank"
-                          rel="noopener noreferrer" aria-label="Mobile Engineer at Mercury Dev">
-                          <span>React Native Developer · <span class="inline-block">Mercury Dev</span></span>
-                        </a>
-                      </h3>
-                      <p class="exp-desc">
-                        As a Mobile Developer at Mercury Dev, I have the opportunity to work with app development for
-                        different types of industries. In my first few months I participated in the development of an
-                        app aimed for personal trainers, where the goal was to provide users with personalised training.
-                        At first, my tasks were to normalise the components that were already implemented for iOS and
-                        had a different behaviour on Android devices. Then, I contributed to the development of a
-                        download manager, to provide the user with a better user experience. After this project, I was
-                        invited to get into a MVP of a banking credit platform. I'm still working on this project where
-                        they have interesting challenges such as optimising the performance of rendering components and
-                        implementing new features.
-                      </p>
-                      <ul class="exp-tags" aria-label="Technologies used">
-                        <li>
-                          <div class="tech-pill">React Native</div>
-                        </li>
-                        <li>
-                          <div class="tech-pill">React</div>
-                        </li>
-                        <li>
-                          <div class="tech-pill">Typescript</div>
-                        </li>
-                        <li>
-                          <div class="tech-pill">Javascript</div>
-                        </li>
-                        <li>
-                          <div class="tech-pill">Redux</div>
-                        </li>
-                        <li>
-                          <div class="tech-pill">Mobx</div>
-                        </li>
-                        <li>
-                          <div class="tech-pill">iOS</div>
-                        </li>
-                        <li>
-                          <div class="tech-pill">Android</div>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </li>
-                <li class="mb-12">
-                  <div class="exp-card">
-                    <div class="exp-card-bg"></div>
-                    <header class="exp-header" aria-label="2019 to 2021">2019 — 2021</header>
-                    <div class="exp-content">
-                      <h3 class="font-medium leading-snug text-slate-200">
-                        <a class="exp-title inline-flex items-baseline group/link" href="#" target="_blank"
-                          rel="noopener noreferrer" aria-label="Full Stack Engineer at Vitasoft">
-                          <span>Full Stack Engineer · <span class="inline-block">Vitasoft</span></span>
-                        </a>
-                      </h3>
-                      <p class="exp-desc">
-                        I started as Fullstack Developer at Vitasoft, working in the code refactoring. I was responsible
-                        to remove duplicate code in the ReactJs components. I also implemented the export feature which
-                        main goal was to export the table data to excel file. After that, I started to work on the Java
-                        version upgrade. The backend was running with Java 7 and to implement the future features such
-                        as GraphQL, it was necessary to bump the java to version 8. Since the project structure is build
-                        upon modules, this upgraded took some time and a lot of research, to avoid breaking the other
-                        modules. With the upgrade completed, I was responsible to start mapping Apache Solr indexes to
-                        retrieve data from database and send it via GraphQL resolvers. I am currently working on
-                        fetching this data in frontend, with apollo js, and present this data to the users.
-                      </p>
-                      <ul class="exp-tags" aria-label="Technologies used">
-                        <li>
-                          <div class="tech-pill">Java</div>
-                        </li>
-                        <li>
-                          <div class="tech-pill">Spring</div>
-                        </li>
-                        <li>
-                          <div class="tech-pill">React</div>
-                        </li>
-                        <li>
-                          <div class="tech-pill">GraphQL</div>
-                        </li>
-                        <li>
-                          <div class="tech-pill">PostgreSQL</div>
-                        </li>
-                        <li>
-                          <div class="tech-pill">Redis</div>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </li>
-                <li class="mb-12">
-                  <div class="exp-card">
-                    <div class="exp-card-bg"></div>
-                    <header class="exp-header" aria-label="2017 to 2019">2017 — 2019</header>
-                    <div class="exp-content">
-                      <h3 class="font-medium leading-snug text-slate-200">
-                        <a class="exp-title inline-flex items-baseline group/link" href="#" target="_blank"
-                          rel="noopener noreferrer" aria-label="Automation Engineer at Globo">
-                          <span>Automation Engineer · <span class="inline-block">Globo</span></span>
-                        </a>
-                      </h3>
-                      <p class="exp-desc">
-                        As an IT specialist at Globo, I was mainly responsible for the technical support for video
-                        editing programs and special effects software. I also take care of media storage and network
-                        connections as well as automation of backup media processes with Python programming language.
-                        My responsibilities also include monitoring network devices, creating installation instructions,
-                        and software configuration.
-                      </p>
-                      <ul class="exp-tags" aria-label="Technologies used">
-                        <li>
-                          <div class="tech-pill">Python</div>
-                        </li>
-                        <li>
-                          <div class="tech-pill">Automation</div>
-                        </li>
-                        <li>
-                          <div class="tech-pill">Networking</div>
-                        </li>
-                        <li>
-                          <div class="tech-pill">Storage</div>
-                        </li>
-                        <li>
-                          <div class="tech-pill">Video</div>
-                        </li>
-                        <li>
-                          <div class="tech-pill">Backup Systems</div>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </li>
-              </ol>
-              <div class="mt-12">
-                <a class="inline-flex items-baseline font-medium leading-tight text-slate-200 hover:text-primary group/link text-base"
-                  href="https://app.getfiledrop.com/share/a74427c0-34f9-454a-b1a0-fe032085b535/download" target="_blank"
-                  rel="noopener noreferrer" aria-label="View Full Résumé">
-                  <span>View Full <span class="inline-block">Résumé</span></span>
-                </a>
-              </div>
-            </div>
-          </section>
-          <!-- Projects -->
-          <section id="projects" class="mb-16 scroll-mt-16 md:mb-24 lg:mb-36 lg:scroll-mt-24"
-            aria-label="Selected projects">
-            <div class="section-heading-mobile">
-              <h2 class="text-sm font-bold uppercase tracking-widest text-slate-200 lg:sr-only">Projects</h2>
-            </div>
-            <div>
-              <ol class="group/list" aria-label="Project list">
-                <!-- Project: Integration Platform -->
-                <li class="mb-12">
-                  <div class="project-card group">
-                    <div class="project-card-bg"></div>
-                    <div class="project-img" aria-hidden="true">
-                      <img alt="Integration Platform (Go, Microservices, MongoDB)" loading="lazy" decoding="async"
-                        src="https://i.postimg.cc/VvFWyBRB/prosegur.png">
-                    </div>
-                    <div class="project-content">
-                      <h3>
-                        <a class="project-title group/link inline-flex items-baseline" href="#"
-                          rel="noopener noreferrer" target="_blank"
-                          aria-label="Integration Platform (Go, Microservices, MongoDB)">
-                          <span>Integration <span class="inline-block">Platform</span></span>
-                        </a>
-                      </h3>
-                      <p class="project-desc mt-2 text-sm leading-relaxed text-slate-400">Mission‑critical microservice
-                        platform integrating heterogeneous internal
-                        systems, handling transformation, validation, and secure routing of high‑volume transactional
-                        messages with observability and progressive delivery guardrails.</p>
-                      <ul class="mt-2 flex flex-wrap" aria-label="Technologies used">
-                        <li class="mr-1.5 mt-2">
-                          <div class="tech-pill">Go</div>
-                        </li>
-                        <li class="mr-1.5 mt-2">
-                          <div class="tech-pill">Microservices</div>
-                        </li>
-                        <li class="mr-1.5 mt-2">
-                          <div class="tech-pill">MongoDB</div>
-                        </li>
-                        <li class="mr-1.5 mt-2">
-                          <div class="tech-pill">Kubernetes</div>
-                        </li>
-                        <li class="mr-1.5 mt-2">
-                          <div class="tech-pill">Azure</div>
-                        </li>
-                        <li class="mr-1.5 mt-2">
-                          <div class="tech-pill">REST</div>
-                        </li>
-                        <li class="mr-1.5 mt-2">
-                          <div class="tech-pill">SOAP</div>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </li>
-                <!-- Project: Fitness Training App -->
-                <li class="mb-12">
-                  <div class="project-card group">
-                    <div class="project-card-bg"></div>
-                    <div class="project-img" aria-hidden="true">
-                      <img alt="Fitness Training Mobile App (React Native, TypeScript)" loading="lazy" decoding="async"
-                        src="https://i.postimg.cc/cJjDTm9C/hyperhuman.png">
-                    </div>
-                    <div class="project-content">
-                      <h3>
-                        <a class="project-title group/link inline-flex items-baseline" href="#"
-                          rel="noopener noreferrer" target="_blank"
-                          aria-label="Fitness Training Mobile App (React Native, TypeScript)">
-                          <span>Fitness Training <span class="inline-block">App</span></span>
-                        </a>
-                      </h3>
-                      <p class="project-desc mt-2 text-sm leading-relaxed text-slate-400">Cross‑platform React Native
-                        application delivering personalized workout
-                        programming, offline media download management, and adaptive UI components normalized across
-                        iOS/Android rendering differences.</p>
-                      <ul class="mt-2 flex flex-wrap" aria-label="Technologies used">
-                        <li class="mr-1.5 mt-2">
-                          <div class="tech-pill">React Native</div>
-                        </li>
-                        <li class="mr-1.5 mt-2">
-                          <div class="tech-pill">TypeScript</div>
-                        </li>
-                        <li class="mr-1.5 mt-2">
-                          <div class="tech-pill">React</div>
-                        </li>
-                        <li class="mr-1.5 mt-2">
-                          <div class="tech-pill">Redux</div>
-                        </li>
-                        <li class="mr-1.5 mt-2">
-                          <div class="tech-pill">MobX</div>
-                        </li>
-                        <li class="mr-1.5 mt-2">
-                          <div class="tech-pill">iOS</div>
-                        </li>
-                        <li class="mr-1.5 mt-2">
-                          <div class="tech-pill">Android</div>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </li>
-                <!-- Project: Credit Platform MVP -->
-                <li class="mb-12">
-                  <div class="project-card group">
-                    <div class="project-card-bg"></div>
-                    <div class="project-img" aria-hidden="true">
-                      <img alt="Credit Platform MVP (React Native, Performance Optimization)" loading="lazy"
-                        decoding="async" src="https://i.postimg.cc/htvbwm7n/share-one.png">
-                    </div>
-                    <div class="project-content">
-                      <h3>
-                        <a class="project-title group/link inline-flex items-baseline" href="#"
-                          rel="noopener noreferrer" target="_blank"
-                          aria-label="Credit Platform MVP (React Native, Performance Optimization)">
-                          <span>Credit Platform <span class="inline-block">MVP</span></span>
-                        </a>
-                      </h3>
-                      <p class="project-desc mt-2 text-sm leading-relaxed text-slate-400">Early‑stage mobile banking
-                        product focusing on performant rendering of
-                        credit workflows, optimized state management, and secure feature rollout under evolving
-                        regulatory requirements.</p>
-                      <ul class="mt-2 flex flex-wrap" aria-label="Technologies used">
-                        <li class="mr-1.5 mt-2">
-                          <div class="tech-pill">React Native</div>
-                        </li>
-                        <li class="mr-1.5 mt-2">
-                          <div class="tech-pill">TypeScript</div>
-                        </li>
-                        <li class="mr-1.5 mt-2">
-                          <div class="tech-pill">Performance</div>
-                        </li>
-                        <li class="mr-1.5 mt-2">
-                          <div class="tech-pill">State Mgmt</div>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </li>
-                <!-- Project: Search & Export Module -->
-                <li class="mb-12">
-                  <div class="project-card group">
-                    <div class="project-card-bg"></div>
-                    <div class="project-img " aria-hidden="true">
-                      <img alt="Search & Export Module (Java, React, GraphQL, Solr)" loading="lazy" decoding="async"
-                        src="https://i.postimg.cc/v8vrZhrc/vitasoft.png">
-                    </div>
-                    <div class="project-content">
-                      <h3>
-                        <a class="project-title group/link inline-flex items-baseline" href="#"
-                          rel="noopener noreferrer" target="_blank"
-                          aria-label="Search & Export Module (Java, React, GraphQL, Solr)">
-                          <span>Search & Export <span class="inline-block">Module</span></span>
-                        </a>
-                      </h3>
-                      <p class="project-desc mt-2 text-sm leading-relaxed text-slate-400">Enterprise data module
-                        refactored for reuse, enabling indexed search via
-                        Solr and Excel export workflows through GraphQL resolvers and Apollo client integration.</p>
-                      <ul class="mt-2 flex flex-wrap" aria-label="Technologies used">
-                        <li class="mr-1.5 mt-2">
-                          <div class="tech-pill">Java</div>
-                        </li>
-                        <li class="mr-1.5 mt-2">
-                          <div class="tech-pill">Spring</div>
-                        </li>
-                        <li class="mr-1.5 mt-2">
-                          <div class="tech-pill">React</div>
-                        </li>
-                        <li class="mr-1.5 mt-2">
-                          <div class="tech-pill">GraphQL</div>
-                        </li>
-                        <li class="mr-1.5 mt-2">
-                          <div class="tech-pill">Solr</div>
-                        </li>
-                        <li class="mr-1.5 mt-2">
-                          <div class="tech-pill">PostgreSQL</div>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </li>
-                <!-- Project: Doctor Consultations App -->
-                <li class="mb-12">
-                  <div class="project-card group">
-                    <div class="project-card-bg"></div>
-                    <div class="project-img" aria-hidden="true">
-                      <img alt="Doctor Consultations App (React Native, Telemedicine)" loading="lazy" decoding="async"
-                        src="https://i.postimg.cc/NMq65PCY/medik.png">
-                    </div>
-                    <div class="project-content">
-                      <h3>
-                        <a class="project-title group/link inline-flex items-baseline"
-                          href="https://bokus.ru/projects/chastnaya-klinika-medik/" rel="noopener noreferrer"
-                          target="_blank" aria-label="Doctor Consultations App (React Native, Telemedicine)">
-                          <span>Doctor Consultations <span class="inline-block">App</span></span>
-                        </a>
-                      </h3>
-                      <p class="project-desc mt-2 text-sm leading-relaxed text-slate-400">React Native telemedicine
-                        application enabling patients to schedule and
-                        attend remote consultations with doctors, manage medical records, and receive real‑time
-                        notifications for upcoming appointments and follow‑ups.</p>
-                      <ul class="mt-2 flex flex-wrap" aria-label="Technologies used">
-                        <li class="mr-1.5 mt-2">
-                          <div class="tech-pill">React Native</div>
-                        </li>
-                        <li class="mr-1.5 mt-2">
-                          <div class="tech-pill">TypeScript</div>
-                        </li>
-                        <li class="mr-1.5 mt-2">
-                          <div class="tech-pill">Telemedicine</div>
-                        </li>
-                        <li class="mr-1.5 mt-2">
-                          <div class="tech-pill">Notifications</div>
-                        </li>
-                        <li class="mr-1.5 mt-2">
-                          <div class="tech-pill">Scheduling</div>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </li>
-              </ol>
-            </div>
-          </section>
-        </main>
+<body x-data="portfolio()">
+
+  <!-- ── Cursor glow ───────────────────────────────────────────── -->
+  <div class="fixed inset-0 pointer-events-none z-0 transition-all duration-100"
+    :style="`background: radial-gradient(600px circle at ${cursor.x}px ${cursor.y}px, oklch(77.48% 0.204 60.62 / 0.04) 0%, transparent 70%)`"
+    @mousemove.window="cursor = { x: $event.clientX, y: $event.clientY }"></div>
+
+  <!-- ── Mobile header ─────────────────────────────────────────── -->
+  <header class="mobile-header">
+    <div class="mobile-header-top">
+      <div>
+        <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:18px;letter-spacing:-0.02em">Gustavo Silva
+        </div>
+        <div style="font-family:'Syne',sans-serif;font-weight:600;font-size:12px;color:var(--primary)">Software Engineer
+        </div>
+      </div>
+      <div style="display:flex;gap:14px;align-items:center">
+        <a href="https://github.com/gusilva" style="color:var(--muted);display:flex" aria-label="GitHub">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
+          </svg>
+        </a>
+        <a href="mailto:silvagustavo@me.com" style="color:var(--muted);display:flex" aria-label="Email">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+            stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="4" width="20" height="16" rx="2" />
+            <path d="m22 7-8.97 5.7a1.94 1.94 0 01-2.06 0L2 7" />
+          </svg>
+        </a>
       </div>
     </div>
-  </div>
+    <nav class="nav-mobile" aria-label="Primary">
+      <template x-for="item in navItems" :key="item">
+        <button class="nav-item" @click="scrollTo(item)" :aria-current="activeSection===item ? 'true' : null"
+          :data-target="item.toLowerCase()">
+          <span class="nav-line"></span>
+          <span x-text="item"></span>
+        </button>
+      </template>
+    </nav>
+  </header>
+
+  <!-- ── Main grid ─────────────────────────────────────────────── -->
+  <div class="portfolio-grid">
+
+    <!-- ── Sidebar ───────────────────────────────────────────── -->
+    <aside class="portfolio-sidebar">
+      <div>
+        <!-- Name & role -->
+        <div class="fade-up" style="animation-delay:0s">
+          <h1
+            style="font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(28px,3vw,40px);line-height:1.1;margin-bottom:10px;letter-spacing:-0.02em">
+            Gustavo Silva
+          </h1>
+          <h2
+            style="font-family:'Syne',sans-serif;font-weight:600;font-size:17px;color:var(--primary);margin-bottom:20px;letter-spacing:-0.01em">
+            Software Engineer
+          </h2>
+          <p class="name-role-copy">
+            <span>Building seamless mobile experiences and</span>
+            <span class="typewriter-slot">
+              <span x-text="typewriter.display"></span><span class="blink">|</span>
+            </span>
+          </p>
+        </div>
+
+        <!-- Desktop nav -->
+        <nav class="nav fade-up" style="margin-top:52px;animation-delay:0.1s" aria-label="Primary">
+          <span class="nav-eyebrow">Navigation</span>
+          <template x-for="item in navItems" :key="item">
+            <button class="nav-item" @click="scrollTo(item)" :aria-current="activeSection===item ? 'true' : null"
+              :data-target="item.toLowerCase()">
+              <span class="nav-line"></span>
+              <span x-text="item"></span>
+            </button>
+          </template>
+        </nav>
+      </div>
+
+      <!-- Social links -->
+      <div class="fade-up" style="animation-delay:0.2s;display:flex;gap:18px;align-items:center">
+        <a href="https://github.com/gusilva" title="GitHub"
+          style="color:var(--muted);transition:color 0.2s,transform 0.2s;display:flex"
+          @mouseenter="$el.style.color='var(--primary)';$el.style.transform='translateY(-2px)'"
+          @mouseleave="$el.style.color='var(--muted)';$el.style.transform='none'">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
+          </svg>
+        </a>
+        <a href="https://www.linkedin.com/in/sgustavo" title="LinkedIn"
+          style="color:var(--muted);transition:color 0.2s,transform 0.2s;display:flex"
+          @mouseenter="$el.style.color='var(--primary)';$el.style.transform='translateY(-2px)'"
+          @mouseleave="$el.style.color='var(--muted)';$el.style.transform='none'">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+          </svg>
+        </a>
+        <a href="mailto:silvagustavo@me.com" title="Email"
+          style="color:var(--muted);transition:color 0.2s,transform 0.2s;display:flex"
+          @mouseenter="$el.style.color='var(--primary)';$el.style.transform='translateY(-2px)'"
+          @mouseleave="$el.style.color='var(--muted)';$el.style.transform='none'">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+            stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="4" width="20" height="16" rx="2" />
+            <path d="m22 7-8.97 5.7a1.94 1.94 0 01-2.06 0L2 7" />
+          </svg>
+        </a>
+        <div style="width:1px;height:16px;background:var(--border);margin:0 4px"></div>
+        <span
+          style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted)">silvagustavo@me.com</span>
+      </div>
+    </aside>
+
+    <!-- ── Main content ───────────────────────────────────────── -->
+    <main class="portfolio-main">
+
+      <!-- ── About ────────────────────────────────────────────── -->
+      <section id="section-about" style="margin-bottom:100px">
+        <div class="section-label"><span>About</span>
+          <hr />
+        </div>
+
+        <div
+          style="display:flex;flex-direction:column;gap:16px;font-size:15px;line-height:1.8;color:oklch(84.955% 0 0 / 0.75)">
+          <p>
+            Software engineer based in <span style="color:var(--primary)">Madrid, Spain</span> with a background
+            spanning mobile, backend, and infrastructure. I specialise in <span style="color:var(--primary)">React
+              Native</span> cross-platform apps and high-concurrency <span style="color:var(--accent)">Go</span>
+            microservices, with hands-on experience writing native <span style="color:oklch(75% 0.15 305.03)">iOS</span>
+            and <span style="color:oklch(75% 0.15 305.03)">Android</span> integrations.
+          </p>
+          <p>
+            My career has taken me from broadcast infrastructure at <span
+              style="color:var(--base-content);font-weight:500">TV Globo</span> in Rio de Janeiro, through mobile
+            product teams in Russia, to leading microservice architecture at <span
+              style="color:var(--base-content);font-weight:500">Prosegur</span> in Madrid. I care about writing software
+            that is fast, maintainable, and genuinely solves problems.
+          </p>
+          <p>
+            Fluent in Portuguese, English and Russian. When I'm not shipping, you'll find me exploring new backend
+            patterns or tinkering with native mobile APIs.
+          </p>
+        </div>
+
+        <!-- Status badge -->
+        <div
+          style="display:inline-flex;align-items:center;gap:8px;margin-top:28px;padding:10px 18px;border-radius:999px;background:oklch(64.8% 0.223 136.073 / 0.1);border:1px solid oklch(64.8% 0.223 136.073 / 0.3)">
+          <div class="blink-pulse"
+            style="width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 8px var(--accent)">
+          </div>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--accent)">Open to new
+            opportunities</span>
+        </div>
+      </section>
+
+      <!-- ── Experience ────────────────────────────────────────── -->
+      <section id="section-experience" style="margin-bottom:100px">
+        <div class="section-label"><span>Experience</span>
+          <hr />
+        </div>
+
+        <!-- Loading state -->
+        <template x-if="experience.length === 0">
+          <div style="color:var(--muted);font-size:14px;padding:20px 0">Loading experience...</div>
+        </template>
+
+        <div style="display:flex;flex-direction:column;gap:4px">
+          <template x-for="item in experience" :key="item.company">
+            <div class="exp-card">
+              <div
+                style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);padding-top:4px;letter-spacing:0.02em"
+                x-text="item.period"></div>
+              <div>
+                <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:4px;flex-wrap:wrap">
+                  <span style="font-family:'Syne',sans-serif;font-weight:700;font-size:16px" x-text="item.role"></span>
+                  <span style="color:var(--primary);font-size:14px">·</span>
+                  <span style="color:var(--muted);font-size:14px" x-text="item.company"></span>
+                </div>
+                <p style="font-size:14px;line-height:1.7;color:oklch(84.955% 0 0 / 0.7);margin-bottom:14px"
+                  x-text="item.body"></p>
+                <div style="display:flex;flex-wrap:wrap;gap:6px">
+                  <template x-for="tag in item.tags" :key="tag">
+                    <span class="tag" :class="tagColor(tag)" x-text="tag"></span>
+                  </template>
+                </div>
+              </div>
+            </div>
+          </template>
+        </div>
+
+        <div style="margin-top:24px;padding-left:20px">
+          <a href="#"
+            style="display:inline-flex;align-items:center;gap:6px;font-family:'Syne',sans-serif;font-weight:600;font-size:13px;color:var(--primary);letter-spacing:0.05em;transition:gap 0.2s"
+            @mouseenter="$el.style.gap='10px'" @mouseleave="$el.style.gap='6px'">
+            View Full Résumé
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round" style="transform:rotate(-45deg)">
+              <line x1="5" y1="12" x2="19" y2="12" />
+              <polyline points="12 5 19 12 12 19" />
+            </svg>
+          </a>
+        </div>
+      </section>
+
+      <!-- ── Projects ──────────────────────────────────────────── -->
+      <section id="section-projects" style="margin-bottom:100px">
+        <div class="section-label"><span>Projects</span>
+          <hr />
+        </div>
+
+        <!-- Loading state -->
+        <template x-if="projects.length === 0">
+          <div style="color:var(--muted);font-size:14px;padding:20px 0">Loading projects...</div>
+        </template>
+
+        <template x-if="projects.length > 0">
+          <div>
+            <!-- Main project card -->
+            <div class="project-card" :class="{'is-portrait': projects[activeProject].orientation === 'portrait'}"
+              style="user-select:none" :style="dragging ? 'cursor:grabbing' : 'cursor:grab'"
+              @mousedown="dragStart = $event.clientX; dragging = true" @mouseup="onDragEnd($event)"
+              @mouseleave="dragging && onDragEnd($event)"
+              @touchstart.passive="dragStart = $event.touches[0].clientX; dragging = true"
+              @touchend="onTouchEnd($event)">
+              <!-- Image -->
+              <div class="project-main-image-shell">
+                <div class="project-main-image-frame">
+                  <img class="project-main-image" :src="projects[activeProject].image"
+                    :alt="projects[activeProject].title" loading="lazy" />
+                </div>
+              </div>
+
+              <!-- Content -->
+              <div class="project-content" style="padding:28px 32px">
+                <div class="project-head" style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px">
+                  <span style="font-family:'Syne',sans-serif;font-weight:800;font-size:20px;color:var(--primary)"
+                    x-text="projects[activeProject].title"></span>
+                  <div style="display:flex;gap:14px;color:var(--muted)">
+                    <a x-show="projects[activeProject].repo" :href="projects[activeProject].repo" style="color:inherit;transition:color 0.2s"
+                      @mouseenter="$el.style.color='var(--base-content)'" @mouseleave="$el.style.color='var(--muted)'"
+                      aria-label="Repository">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                          d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
+                      </svg>
+                    </a>
+                    <a :href="projects[activeProject].link" style="color:inherit;transition:color 0.2s"
+                      @mouseenter="$el.style.color='var(--base-content)'" @mouseleave="$el.style.color='var(--muted)'"
+                      aria-label="Live link">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6" />
+                        <polyline points="15 3 21 3 21 9" />
+                        <line x1="10" y1="14" x2="21" y2="3" />
+                      </svg>
+                    </a>
+                  </div>
+                </div>
+                <div class="project-desc">
+                  <p style="font-size:14px;line-height:1.75;color:oklch(84.955% 0 0 / 0.65);margin-bottom:20px"
+                    x-text="projects[activeProject].body"></p>
+                  <div style="display:flex;flex-wrap:wrap;gap:7px">
+                    <template x-for="tag in projects[activeProject].tags" :key="tag">
+                      <span class="tag" :class="tagColor(tag)" x-text="tag"></span>
+                    </template>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Carousel controls -->
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-top:20px">
+              <!-- Dot indicators -->
+              <div style="display:flex;gap:8px;align-items:center">
+                <template x-for="(_, i) in projects" :key="i">
+                  <button @click="activeProject = i"
+                    style="height:7px;border-radius:999px;border:none;cursor:pointer;padding:0;transition:all 0.3s"
+                    :style="`width:${i===activeProject?'24px':'7px'};background:${i===activeProject?'var(--primary)':'oklch(84.955% 0 0 / 0.2)'}`"
+                    :aria-label="`Project ${i+1}`"></button>
+                </template>
+              </div>
+
+              <!-- Counter + arrows -->
+              <div style="display:flex;align-items:center;gap:16px">
+                <span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted)">
+                  <span x-text="String(activeProject+1).padStart(2,'0')"></span> / <span
+                    x-text="String(projects.length).padStart(2,'0')"></span>
+                </span>
+                <div style="display:flex;gap:8px">
+                  <button @click="prevProject()"
+                    style="width:38px;height:38px;border-radius:50%;background:var(--base-200);border:1px solid var(--border);color:var(--muted);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s"
+                    @mouseenter="$el.style.borderColor='var(--primary)';$el.style.color='var(--primary)'"
+                    @mouseleave="$el.style.borderColor='var(--border)';$el.style.color='var(--muted)'"
+                    aria-label="Previous project">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                      stroke-linecap="round" stroke-linejoin="round" style="transform:rotate(180deg)">
+                      <line x1="5" y1="12" x2="19" y2="12" />
+                      <polyline points="12 5 19 12 12 19" />
+                    </svg>
+                  </button>
+                  <button @click="nextProject()"
+                    style="width:38px;height:38px;border-radius:50%;background:var(--base-200);border:1px solid var(--border);color:var(--muted);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s"
+                    @mouseenter="$el.style.borderColor='var(--primary)';$el.style.color='var(--primary)'"
+                    @mouseleave="$el.style.borderColor='var(--border)';$el.style.color='var(--muted)'"
+                    aria-label="Next project">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                      stroke-linecap="round" stroke-linejoin="round">
+                      <line x1="5" y1="12" x2="19" y2="12" />
+                      <polyline points="12 5 19 12 12 19" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Thumbnail strip -->
+            <div class="project-thumbs" x-ref="projectThumbs">
+              <template x-for="(p, i) in projects" :key="i">
+                <button class="project-thumb-btn" @click="setActiveProject(i)"
+                  :style="`border:1.5px solid ${i===activeProject?'var(--primary)':'var(--border)'};opacity:${i===activeProject?1:0.55}`"
+                  @mouseenter="if ($el !== undefined && i !== activeProject) $el.style.opacity = '0.85'"
+                  @mouseleave="if ($el !== undefined && i !== activeProject) $el.style.opacity = '0.55'"
+                  :aria-label="`Go to project: ${p.title}`">
+                  <img :src="p.image" :alt="p.title" style="width:100%;height:100%;object-fit:cover;pointer-events:none"
+                    loading="lazy" />
+                </button>
+              </template>
+            </div>
+          </div>
+        </template>
+      </section>
+
+      <!-- ── Skills ────────────────────────────────────────────── -->
+      <section id="section-skills" style="margin-bottom:100px">
+        <div class="section-label"><span>Skills</span>
+          <hr />
+        </div>
+
+        <div class="skills-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+          <template x-for="group in skills" :key="group.category">
+            <div style="padding:22px 24px;border-radius:12px;background:var(--base-200);border:1px solid var(--border)">
+              <div
+                style="font-family:'Syne',sans-serif;font-weight:700;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:var(--primary);margin-bottom:16px"
+                x-text="group.category"></div>
+              <div style="display:flex;flex-direction:column;gap:10px">
+                <template x-for="item in group.items" :key="item.label">
+                  <div style="display:flex;align-items:center;gap:10px">
+                    <template x-if="item.icon">
+                      <i :class="item.icon"
+                        :style="`font-size:18px;color:${iconColors[item.icon]||'var(--muted)'};width:20px;text-align:center;flex-shrink:0`"></i>
+                    </template>
+                    <template x-if="!item.icon">
+                      <div style="width:20px;display:flex;justify-content:center;flex-shrink:0">
+                        <div style="width:5px;height:5px;border-radius:50%;background:var(--muted)"></div>
+                      </div>
+                    </template>
+                    <span style="font-size:14px;color:oklch(84.955% 0 0 / 0.8)" x-text="item.label"></span>
+                  </div>
+                </template>
+              </div>
+            </div>
+          </template>
+        </div>
+      </section>
+
+      <!-- ── Footer ────────────────────────────────────────────── -->
+      <footer class="portfolio-footer"
+        style="border-top:1px solid var(--border);padding-top:32px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
+        <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted)">Designed &amp; built by
+          Gustavo Silva</span>
+        <a href="mailto:silvagustavo@me.com"
+          style="display:inline-flex;align-items:center;gap:6px;font-family:'Syne',sans-serif;font-weight:600;font-size:13px;color:var(--primary);transition:gap 0.2s"
+          @mouseenter="$el.style.gap='10px'" @mouseleave="$el.style.gap='6px'">
+          Get in touch
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round" style="transform:rotate(-45deg)">
+            <line x1="5" y1="12" x2="19" y2="12" />
+            <polyline points="12 5 19 12 12 19" />
+          </svg>
+        </a>
+      </footer>
+
+    </main>
+  </div><!-- /.portfolio-grid -->
+
+  <!-- ── Alpine.js store ───────────────────────────────────────── -->
   <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      const nav = document.querySelector('.nav');
-      if (!nav) return;
-      nav.addEventListener('click', function (e) {
-        const link = e.target.closest('a');
-        if (!link) return;
-        document.querySelectorAll('.nav-indicator.active, .nav-text.active').forEach(function (el) {el.classList.remove('active');});
-        const indicator = link.querySelector('.nav-indicator');
-        const text = link.querySelector('.nav-text');
-        if (indicator) indicator.classList.add('active');
-        if (text) text.classList.add('active');
-      });
-    });
+    function portfolio() {
+      return {
+        // ── Nav ──────────────────────────────────────────────────
+        navItems: ['About', 'Experience', 'Projects', 'Skills'],
+        activeSection: 'About',
+
+        // ── Cursor glow ──────────────────────────────────────────
+        cursor: {x: -999, y: -999},
+
+        // ── Typewriter ───────────────────────────────────────────
+        typewriter: {
+          texts: ['React Native apps.', 'Go microservices.', 'native iOS modules.', 'Android integrations.', 'scalable APIs.'],
+          display: '',
+          idx: 0,
+          phase: 'typing',  // typing | pausing | erasing
+          speed: 70,
+          pause: 1800,
+          _timer: null,
+          tick() {
+            const current = this.texts[this.idx];
+            if (this.phase === 'typing') {
+              if (this.display.length < current.length) {
+                this.display = current.slice(0, this.display.length + 1);
+                this._timer = setTimeout(() => this.tick(), this.speed);
+              } else {
+                this.phase = 'pausing';
+                this._timer = setTimeout(() => this.tick(), this.pause);
+              }
+            } else if (this.phase === 'pausing') {
+              this.phase = 'erasing';
+              this._timer = setTimeout(() => this.tick(), 200);
+            } else if (this.phase === 'erasing') {
+              if (this.display.length > 0) {
+                this.display = this.display.slice(0, -1);
+                this._timer = setTimeout(() => this.tick(), this.speed / 2);
+              } else {
+                this.idx = (this.idx + 1) % this.texts.length;
+                this.phase = 'typing';
+                this.tick();
+              }
+            }
+          },
+        },
+
+        // ── Data ─────────────────────────────────────────────────
+        experience: [],
+        projects: [],
+
+        // ── Carousel ─────────────────────────────────────────────
+        activeProject: 0,
+        dragging: false,
+        dragStart: 0,
+
+        // ── Skills (static — no markdown needed) ─────────────────
+        skills: [
+          {
+            category: 'Mobile', items: [
+              {label: 'React Native', icon: 'devicon-react-original'},
+              {label: 'iOS / Swift', icon: 'devicon-swift-plain'},
+              {label: 'Android / Kotlin', icon: 'devicon-kotlin-plain'},
+              {label: 'Redux / Saga', icon: 'devicon-redux-original'},
+              {label: 'Expo', icon: 'devicon-react-original'},
+              {label: 'Detox', icon: null},
+            ]
+          },
+          {
+            category: 'Backend', items: [
+              {label: 'Golang', icon: 'devicon-go-plain'},
+              {label: 'Java / Spring Boot', icon: 'devicon-spring-plain'},
+              {label: 'NestJS', icon: 'devicon-nestjs-plain'},
+              {label: 'GraphQL', icon: 'devicon-graphql-plain'},
+              {label: 'PostgreSQL', icon: 'devicon-postgresql-plain'},
+              {label: 'MongoDB', icon: 'devicon-mongodb-plain'},
+            ]
+          },
+          {
+            category: 'Languages', items: [
+              {label: 'TypeScript', icon: 'devicon-typescript-plain'},
+              {label: 'JavaScript', icon: 'devicon-javascript-plain'},
+              {label: 'Kotlin', icon: 'devicon-kotlin-plain'},
+              {label: 'Golang', icon: 'devicon-go-plain'},
+              {label: 'Java', icon: 'devicon-java-plain'},
+              {label: 'Python', icon: 'devicon-python-plain'},
+            ]
+          },
+          {
+            category: 'Tooling', items: [
+              {label: 'Docker', icon: 'devicon-docker-plain'},
+              {label: 'Linux', icon: 'devicon-linux-plain'},
+              {label: 'GitHub Actions', icon: 'devicon-github-original'},
+              {label: 'AWS', icon: 'devicon-amazonwebservices-plain'},
+              {label: 'Webpack', icon: 'devicon-webpack-plain'},
+              {label: 'Gradle', icon: 'devicon-gradle-plain'},
+            ]
+          },
+        ],
+
+        iconColors: {
+          'devicon-react-original': '#61DAFB',
+          'devicon-swift-plain': '#F05138',
+          'devicon-kotlin-plain': '#7F52FF',
+          'devicon-redux-original': '#764ABC',
+          'devicon-go-plain': '#00ACD7',
+          'devicon-spring-plain': '#6DB33F',
+          'devicon-nestjs-plain': '#E0234E',
+          'devicon-graphql-plain': '#E10098',
+          'devicon-postgresql-plain': '#336791',
+          'devicon-mongodb-plain': '#47A248',
+          'devicon-typescript-plain': '#3178C6',
+          'devicon-javascript-plain': '#F7DF1E',
+          'devicon-java-plain': '#ED8B00',
+          'devicon-python-plain': '#3776AB',
+          'devicon-docker-plain': '#2496ED',
+          'devicon-linux-plain': '#FCC624',
+          'devicon-github-original': '#aaa',
+          'devicon-amazonwebservices-plain': '#FF9900',
+          'devicon-webpack-plain': '#8DD6F9',
+          'devicon-gradle-plain': '#02303A',
+        },
+
+        // ── Init ─────────────────────────────────────────────────
+        async init() {
+          this.typewriter.tick();
+
+          // Scroll-spy — scroll listener at 45% viewport threshold.
+          // Equivalent to IntersectionObserver rootMargin "-40% 0px -55% 0px"
+          // but uses a direct scroll event so Alpine's reactivity is guaranteed
+          // to pick up the activeSection mutation.
+          const sections = this.navItems
+            .map(id => ({id, el: document.getElementById('section-' + id.toLowerCase())}))
+            .filter(s => s.el);
+          const updateActiveSection = () => {
+            const threshold = window.scrollY + window.innerHeight * 0.45;
+            let current = sections[0].id;
+            for (const {id, el} of sections) {
+              if (el.offsetTop <= threshold) current = id;
+            }
+            this.activeSection = current;
+          };
+          window.addEventListener('scroll', updateActiveSection, {passive: true});
+          updateActiveSection(); // set correct item on initial load
+          await Promise.all([
+            this.loadSection('experience', [
+              '00-osapiens.md',
+              '01-prosegur.md',
+              '02-merk-team.md',
+              '03-sharptx.md',
+              '04-vitasoft.md',
+              '05-tvglobo.md',
+            ]),
+            this.loadSection('projects', [
+              '00-osapiens-maintenance.md',
+              '01-prosegur-platform.md',
+              '02-banking-credit.md',
+              '03-dementia-app.md',
+              '04-license-monitor.md',
+              '05-graphql-vitasoft.md',
+              '06-portfolio.md',
+              '07-fitness-training-app.md',
+              '08-doctor-consultations-app.md',
+            ]),
+          ]);
+        },
+
+        async loadSection(type, files) {
+          const results = await Promise.all(
+            files.map(f => this.parseMarkdown(`./data/${type}/${f}`))
+          );
+          this[type] = results;
+        },
+
+        async parseMarkdown(path) {
+          try {
+            const res = await fetch(path, {cache: 'no-cache'});
+            if (!res.ok) throw new Error(`Failed to fetch ${path}`);
+            const raw = await res.text();
+            return this.parseFrontmatter(raw);
+          } catch (e) {
+            console.error(e);
+            return {body: '', tags: []};
+          }
+        },
+
+        parseFrontmatter(raw) {
+          const parts = raw.split(/^---\s*$/m);
+          if (parts.length < 3) return {body: marked.parse(raw.trim()), tags: []};
+
+          const meta = parts[1];
+          const body = parts.slice(2).join('---').trim();
+
+          const data = {};
+          meta.trim().split('\n').forEach(line => {
+            const colon = line.indexOf(':');
+            if (colon === -1) return;
+            const key = line.slice(0, colon).trim();
+            const val = line.slice(colon + 1).trim().replace(/^["']|["']$/g, '');
+            data[key] = val;
+          });
+
+          // Tags: comma-separated string → array
+          data.tags = data.tags
+            ? data.tags.split(',').map(t => t.trim()).filter(Boolean)
+            : [];
+
+          // Body: plain text (no markdown block elements in these short descriptions)
+          data.body = body;
+
+          return data;
+        },
+
+        // ── Helpers ──────────────────────────────────────────────
+        tagColor(tag) {
+          const map = {
+            'Golang': 'tag-accent', 'Go': 'tag-accent', 'gRPC': 'tag-accent',
+            'iOS': 'tag-secondary', 'Swift': 'tag-secondary', 'SwiftUI': 'tag-secondary',
+            'Android': 'tag-secondary', 'Kotlin': 'tag-secondary',
+          };
+          return map[tag] || 'tag-primary';
+        },
+
+        scrollTo(id) {
+          const el = document.getElementById('section-' + id.toLowerCase());
+          if (!el) return;
+          const offset = el.getBoundingClientRect().top + window.scrollY - 80;
+          window.scrollTo({top: offset, behavior: 'smooth'});
+        },
+
+        setActiveProject(index) {
+          this.activeProject = index;
+          this.scrollActiveThumbnail();
+        },
+
+        scrollActiveThumbnail() {
+          const strip = this.$refs.projectThumbs;
+          if (!strip) return;
+          const activeThumb = strip.children[this.activeProject];
+          if (!activeThumb) return;
+          activeThumb.scrollIntoView({behavior: 'smooth', inline: 'center', block: 'nearest'});
+        },
+
+        // ── Carousel ─────────────────────────────────────────────
+        prevProject() {
+          this.setActiveProject((this.activeProject - 1 + this.projects.length) % this.projects.length);
+        },
+        nextProject() {
+          this.setActiveProject((this.activeProject + 1) % this.projects.length);
+        },
+        onDragEnd(e) {
+          if (!this.dragging) return;
+          this.dragging = false;
+          const diff = e.clientX - this.dragStart;
+          if (diff < -40) this.nextProject();
+          else if (diff > 40) this.prevProject();
+        },
+        onTouchEnd(e) {
+          if (!this.dragging) return;
+          this.dragging = false;
+          const diff = e.changedTouches[0].clientX - this.dragStart;
+          if (diff < -40) this.nextProject();
+          else if (diff > 40) this.prevProject();
+        },
+      };
+    }
   </script>
+
 </body>
 
 </html>

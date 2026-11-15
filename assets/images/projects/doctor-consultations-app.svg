@@ -1,0 +1,61 @@
+<svg width="100%" viewBox="0 0 1440 440" role="img" xmlns="http://www.w3.org/2000/svg">
+  <title>Doctor Consultations App Placeholder</title>
+  <desc>Placeholder banner for the Doctor Consultations App project.</desc>
+  <defs>
+    <linearGradient id="medBg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0F2742"/>
+      <stop offset="100%" stop-color="#0C4A6E"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1440" height="440" fill="url(#medBg)"/>
+  <circle cx="1180" cy="80" r="170" fill="#22C55E" fill-opacity="0.12"/>
+  <circle cx="1320" cy="320" r="200" fill="#38BDF8" fill-opacity="0.12"/>
+  <circle cx="240" cy="350" r="180" fill="#14B8A6" fill-opacity="0.10"/>
+
+  <text x="72" y="102" fill="#67E8F9" font-family="sans-serif" font-size="14" letter-spacing="4">TELEMEDICINE</text>
+  <text x="72" y="176" fill="#FFFFFF" font-family="sans-serif" font-size="52" font-weight="700">Doctor</text>
+  <text x="72" y="226" fill="#CFFAFE" font-family="sans-serif" font-size="52" font-weight="300">Consultations App</text>
+  <line x1="72" y1="254" x2="302" y2="254" stroke="#22C55E" stroke-width="3"/>
+  <text x="72" y="300" fill="#CFFAFE" font-family="sans-serif" font-size="17">Scheduling, records, and real-time follow-up notifications.</text>
+
+  <rect x="72" y="332" width="126" height="34" rx="17" fill="#0F766E" fill-opacity="0.50"/>
+  <text x="135" y="354" fill="#CCFBF1" font-family="sans-serif" font-size="13" text-anchor="middle">React Native</text>
+  <rect x="212" y="332" width="118" height="34" rx="17" fill="#0284C7" fill-opacity="0.34"/>
+  <text x="271" y="354" fill="#E0F2FE" font-family="sans-serif" font-size="13" text-anchor="middle">Scheduling</text>
+  <rect x="344" y="332" width="132" height="34" rx="17" fill="#15803D" fill-opacity="0.30"/>
+  <text x="410" y="354" fill="#DCFCE7" font-family="sans-serif" font-size="13" text-anchor="middle">Notifications</text>
+
+  <g transform="translate(830 50)">
+    <rect x="0" y="0" width="196" height="338" rx="26" fill="#F0FDFF" stroke="#FFFFFF" stroke-opacity="0.3"/>
+    <rect x="18" y="18" width="160" height="82" rx="18" fill="#E0F2FE"/>
+    <circle cx="60" cy="59" r="24" fill="#0EA5E9" fill-opacity="0.22"/>
+    <rect x="96" y="42" width="56" height="8" rx="4" fill="#0F172A"/>
+    <rect x="96" y="58" width="42" height="7" rx="3.5" fill="#0369A1"/>
+    <rect x="18" y="118" width="160" height="64" rx="16" fill="#FFFFFF"/>
+    <rect x="18" y="196" width="160" height="64" rx="16" fill="#FFFFFF"/>
+    <rect x="18" y="274" width="160" height="46" rx="14" fill="#0F766E"/>
+    <rect x="36" y="136" width="58" height="8" rx="4" fill="#0F172A"/>
+    <rect x="36" y="153" width="104" height="7" rx="3.5" fill="#94A3B8"/>
+    <rect x="36" y="214" width="72" height="8" rx="4" fill="#0F172A"/>
+    <rect x="36" y="231" width="92" height="7" rx="3.5" fill="#94A3B8"/>
+    <text x="98" y="302" fill="#ECFEFF" font-family="sans-serif" font-size="14" font-weight="700" text-anchor="middle">Start Consultation</text>
+  </g>
+
+  <g transform="translate(1058 82)">
+    <rect x="0" y="0" width="176" height="300" rx="24" fill="#082F49" stroke="#7DD3FC" stroke-opacity="0.22"/>
+    <rect x="16" y="18" width="144" height="94" rx="16" fill="#0C4A6E"/>
+    <circle cx="52" cy="54" r="22" fill="#22C55E" fill-opacity="0.22"/>
+    <rect x="82" y="40" width="54" height="8" rx="4" fill="#ECFEFF"/>
+    <rect x="82" y="56" width="46" height="7" rx="3.5" fill="#A5F3FC"/>
+    <rect x="16" y="132" width="144" height="40" rx="12" fill="#0F172A"/>
+    <rect x="16" y="184" width="144" height="40" rx="12" fill="#0F172A"/>
+    <rect x="16" y="236" width="144" height="40" rx="12" fill="#0F172A"/>
+    <circle cx="36" cy="152" r="8" fill="#22C55E"/>
+    <circle cx="36" cy="204" r="8" fill="#38BDF8"/>
+    <circle cx="36" cy="256" r="8" fill="#F59E0B"/>
+    <rect x="54" y="148" width="72" height="8" rx="4" fill="#ECFEFF"/>
+    <rect x="54" y="200" width="84" height="8" rx="4" fill="#ECFEFF"/>
+    <rect x="54" y="252" width="66" height="8" rx="4" fill="#ECFEFF"/>
+  </g>
+</svg>

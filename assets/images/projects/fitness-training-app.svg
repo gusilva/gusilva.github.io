@@ -1,0 +1,59 @@
+<svg width="100%" viewBox="0 0 1440 440" role="img" xmlns="http://www.w3.org/2000/svg">
+  <title>Fitness Training App Placeholder</title>
+  <desc>Placeholder banner for the Fitness Training App project.</desc>
+  <defs>
+    <linearGradient id="fitnessBg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1D1039"/>
+      <stop offset="100%" stop-color="#5B21B6"/>
+    </linearGradient>
+    <linearGradient id="fitnessCard" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2A1452"/>
+      <stop offset="100%" stop-color="#140B2A"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1440" height="440" fill="url(#fitnessBg)"/>
+  <circle cx="1180" cy="90" r="180" fill="#A855F7" fill-opacity="0.16"/>
+  <circle cx="1320" cy="340" r="160" fill="#22D3EE" fill-opacity="0.14"/>
+  <circle cx="220" cy="40" r="120" fill="#C084FC" fill-opacity="0.10"/>
+
+  <text x="72" y="102" fill="#C4B5FD" font-family="sans-serif" font-size="14" letter-spacing="4">MOBILE FITNESS</text>
+  <text x="72" y="176" fill="#FFFFFF" font-family="sans-serif" font-size="52" font-weight="700">Fitness Training</text>
+  <text x="72" y="226" fill="#DDD6FE" font-family="sans-serif" font-size="52" font-weight="300">App</text>
+  <line x1="72" y1="254" x2="250" y2="254" stroke="#22D3EE" stroke-width="3"/>
+  <text x="72" y="300" fill="#C4B5FD" font-family="sans-serif" font-size="17">Personalized programs, offline workouts, and adaptive UI.</text>
+
+  <rect x="72" y="332" width="132" height="34" rx="17" fill="#7C3AED" fill-opacity="0.45"/>
+  <text x="138" y="354" fill="#E9D5FF" font-family="sans-serif" font-size="13" text-anchor="middle">React Native</text>
+  <rect x="218" y="332" width="122" height="34" rx="17" fill="#06B6D4" fill-opacity="0.28"/>
+  <text x="279" y="354" fill="#CFFAFE" font-family="sans-serif" font-size="13" text-anchor="middle">TypeScript</text>
+  <rect x="354" y="332" width="98" height="34" rx="17" fill="#8B5CF6" fill-opacity="0.28"/>
+  <text x="403" y="354" fill="#F5F3FF" font-family="sans-serif" font-size="13" text-anchor="middle">Offline</text>
+
+  <g transform="translate(820 48)">
+    <rect x="0" y="0" width="210" height="344" rx="28" fill="#120923" stroke="#FFFFFF" stroke-opacity="0.18"/>
+    <rect x="16" y="16" width="178" height="92" rx="18" fill="#6D28D9"/>
+    <text x="32" y="48" fill="#FFFFFF" font-family="sans-serif" font-size="14" font-weight="700">Today's Plan</text>
+    <text x="32" y="72" fill="#DDD6FE" font-family="sans-serif" font-size="12">Strength  ·  42 min</text>
+    <rect x="16" y="126" width="178" height="76" rx="16" fill="url(#fitnessCard)"/>
+    <rect x="16" y="216" width="178" height="48" rx="14" fill="#251243"/>
+    <rect x="16" y="278" width="178" height="50" rx="14" fill="#251243"/>
+    <rect x="32" y="144" width="54" height="8" rx="4" fill="#E9D5FF"/>
+    <rect x="32" y="162" width="106" height="7" rx="3.5" fill="#A78BFA" fill-opacity="0.75"/>
+    <rect x="32" y="230" width="84" height="8" rx="4" fill="#FFFFFF"/>
+    <rect x="32" y="247" width="124" height="7" rx="3.5" fill="#C4B5FD" fill-opacity="0.75"/>
+    <rect x="32" y="292" width="72" height="8" rx="4" fill="#FFFFFF"/>
+    <rect x="32" y="309" width="118" height="7" rx="3.5" fill="#C4B5FD" fill-opacity="0.75"/>
+  </g>
+
+  <g transform="translate(1060 76)">
+    <rect x="0" y="0" width="180" height="312" rx="26" fill="#F6F2FF" stroke="#FFFFFF" stroke-opacity="0.35"/>
+    <rect x="18" y="18" width="144" height="118" rx="18" fill="#FFFFFF"/>
+    <circle cx="90" cy="76" r="34" fill="#C4B5FD"/>
+    <path d="M90 50 C104 50 116 62 116 76 C116 90 104 102 90 102 C76 102 64 90 64 76 C64 62 76 50 90 50Z" fill="#8B5CF6" fill-opacity="0.5"/>
+    <rect x="18" y="154" width="144" height="16" rx="8" fill="#DDD6FE"/>
+    <rect x="18" y="182" width="112" height="12" rx="6" fill="#C4B5FD"/>
+    <rect x="18" y="218" width="144" height="56" rx="14" fill="#EDE9FE"/>
+    <rect x="18" y="286" width="144" height="12" rx="6" fill="#C4B5FD"/>
+  </g>
+</svg>
