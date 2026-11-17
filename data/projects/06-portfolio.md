@@ -3,6 +3,7 @@ title: Personal Portfolio — gu-silva.com
 image: ./assets/images/projects/portfolio.svg
 link: https://www.gu-silva.com
 repo: https://github.com/gusilva
+hidden: true
 tags: Alpine.js, Tailwind CSS, marked.js, SVG
 ---
 

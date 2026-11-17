@@ -3,6 +3,7 @@ title: Prosegur Microservices Platform
 image: ./assets/images/projects/prosegur-platform.jpg
 link: https://www.prosegur.com
 repo: "#"
+hidden: true
 tags: Golang, Microservices, Docker, CI/CD, REST
 ---
 

@@ -351,10 +351,6 @@
         .skills-grid {
           grid-template-columns: 1fr !important;
         }
-
-        .project-main-image-shell {
-          padding: 20px 20px 0;
-        }
       }
 
       /* ── Tag pill ────────────────────────────────────────────────── */
@@ -415,146 +411,306 @@
         }
       }
 
-      /* ── Project card ────────────────────────────────────────────── */
-      .project-card {
-        width: 100%;
-        max-width: 100%;
-        border-radius: 14px;
-        border: 1px solid var(--border);
-        background: var(--base-200);
-        overflow: hidden;
-      }
-
-      .project-main-image-shell {
+      /* ── Projects list + gallery ─────────────────────────────────── */
+      .pg {
+        grid-row: 1 / span 2;
         display: flex;
-        justify-content: center;
-        padding: 24px 24px 0;
+        flex-direction: column;
+        gap: 8px;
+        min-width: 0;
       }
-
-      .project-main-image-frame {
-        width: min(100%, 720px);
-        height: 220px;
-        overflow: hidden;
-        border-radius: 12px;
-        border: 1px solid var(--border);
-        background: var(--base-100);
+      .pg button {
+        font: inherit;
+        color: inherit;
+        cursor: pointer;
       }
-
-      .project-main-image {
+      .pg-main {
+        position: relative;
         display: block;
+        padding: 0;
+        aspect-ratio: 3/4;
+        border-radius: 14px;
+        overflow: hidden;
+        border: 1px solid var(--border);
+        background: #1f1f1f;
+        transition: border-color 0.25s;
+      }
+      .pg-main:hover,
+      .pg-main:focus-visible {
+        border-color: oklch(77.48% 0.204 60.62 / 0.5);
+        outline: none;
+      }
+      .pg-main img {
         width: 100%;
         height: 100%;
-        object-position: center;
-        pointer-events: none;
-      }
-
-      /* Portrait layout: tall image on the left, title/links top-right, description bottom-right */
-      .project-card.is-portrait {
-        display: grid;
-        grid-template-columns: 260px 1fr;
-        grid-template-rows: auto 1fr;
-        gap: 16px;
-        padding: 24px;
-      }
-
-      .project-card.is-portrait .project-main-image-shell {
-        grid-column: 1;
-        grid-row: 1 / span 2;
-        padding: 0;
-      }
-
-      .project-card.is-portrait .project-main-image-frame {
-        width: 100%;
-        height: 520px;
-        border: none;
-      }
-
-      .project-card.is-portrait .project-main-image {
         object-fit: cover;
-        object-position: top;
+        display: block;
+        transform: scale(1.045);
+        transition: transform 0.4s;
       }
-
-      .project-card.is-portrait .project-content {
-        display: contents;
+      .pg-main:hover img {
+        transform: scale(1.08);
       }
-
-      .project-card.is-portrait .project-head,
-      .project-card.is-portrait .project-desc {
-        grid-column: 2;
-        padding: 20px 22px;
-        margin: 0 !important;
+      .pg-count,
+      .pg-zoom {
+        position: absolute;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 11px;
+        background: oklch(14% 0.004 49.25 / 0.8);
+        color: var(--base-content);
+        border-radius: 6px;
+        padding: 3px 7px;
       }
-
-      .project-card.is-portrait .project-head {
-        grid-row: 1;
-        align-items: center !important;
-        gap: 16px;
+      .pg-count {
+        left: 8px;
+        bottom: 8px;
       }
-
-      .project-card.is-portrait .project-desc {
-        grid-row: 2;
+      .pg-zoom {
+        right: 8px;
+        bottom: 8px;
+        opacity: 0;
+        transition: opacity 0.2s;
       }
-
-      @media (max-width: 767px) {
-        .project-card.is-portrait {
-          grid-template-columns: 1fr;
-          grid-template-rows: auto;
-          padding: 16px;
-        }
-
-        .project-card.is-portrait .project-main-image-shell,
-        .project-card.is-portrait .project-head,
-        .project-card.is-portrait .project-desc {
-          grid-column: 1;
-          grid-row: auto;
-        }
-
-        .project-card.is-portrait .project-main-image-frame {
-          width: 220px;
-          height: 440px;
-          margin: 0 auto;
-        }
+      .pg-main:hover .pg-zoom,
+      .pg-main:focus-visible .pg-zoom {
+        opacity: 1;
       }
-
-      .project-thumb-btn {
-        flex-shrink: 0;
-        width: 88px;
-        height: 52px;
-        border-radius: 8px;
-        overflow: hidden;
-        cursor: pointer;
+      .pg-thumbs {
+        display: grid;
+        grid-template-columns: repeat(var(--n, 5), minmax(0, 1fr));
+        gap: 6px;
+      }
+      .pg-thumb {
         padding: 0;
-        background: none;
+        aspect-ratio: 3/4;
+        border-radius: 6px;
+        overflow: hidden;
+        border: 1px solid var(--border);
+        background: #1f1f1f;
+        opacity: 0.5;
         transition:
           opacity 0.2s,
           border-color 0.2s;
       }
-
-      .project-thumbs {
+      .pg-thumb:hover {
+        opacity: 0.85;
+      }
+      .pg-thumb[aria-selected="true"] {
+        opacity: 1;
+        border-color: var(--primary);
+      }
+      .pg-thumb:focus-visible {
+        outline: 2px solid var(--primary);
+        outline-offset: 2px;
+      }
+      .pg-thumb img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center 30%;
+        display: block;
+        transform: scale(1.06);
+      }
+      .pg-lb {
+        position: fixed;
+        inset: 0;
+        z-index: 1000;
+        background: oklch(10% 0.004 49.25 / 0.92);
         display: flex;
-        gap: 10px;
-        margin-top: 16px;
-        overflow-x: auto;
-        padding-bottom: 4px;
-        scrollbar-width: thin;
-        scrollbar-color: oklch(84.955% 0 0 / 0.22) transparent;
+        align-items: center;
+        justify-content: center;
+        padding: 48px 80px;
+        animation: pgfade 0.2s;
       }
-
-      .project-thumbs::-webkit-scrollbar {
-        height: 4px;
+      @keyframes pgfade {
+        from {
+          opacity: 0;
+        }
       }
-
-      .project-thumbs::-webkit-scrollbar-track {
-        background: transparent;
+      .pg-lb figure {
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        max-height: 100%;
       }
-
-      .project-thumbs::-webkit-scrollbar-thumb {
-        background: oklch(84.955% 0 0 / 0.22);
-        border-radius: 999px;
+      .pg-lb figure {
+        overflow: hidden;
+        border-radius: 14px;
       }
-
-      .project-thumbs::-webkit-scrollbar-thumb:hover {
-        background: oklch(84.955% 0 0 / 0.32);
+      .pg-lb figure img {
+        max-height: calc(100vh - 140px);
+        max-width: 100%;
+        object-fit: contain;
+        display: block;
+        clip-path: inset(1.2% round 14px);
+      }
+      .pg-lb figcaption {
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+        font-size: 13px;
+        color: oklch(84.955% 0 0 / 0.75);
+      }
+      .pg-lb-n {
+        font-family: "JetBrains Mono", monospace;
+        color: var(--muted);
+      }
+      .pg-lb-btn {
+        position: absolute;
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        border: 1px solid var(--border);
+        background: var(--base-100);
+        color: var(--base-content);
+        font-size: 16px;
+        cursor: pointer;
+        transition:
+          border-color 0.2s,
+          color 0.2s;
+      }
+      .pg-lb-btn:hover,
+      .pg-lb-btn:focus-visible {
+        border-color: var(--primary);
+        color: var(--primary);
+        outline: none;
+      }
+      .pg-lb-close {
+        top: 20px;
+        right: 20px;
+      }
+      .pg-lb-prev {
+        left: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+      .pg-lb-next {
+        right: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+      @media (max-width: 767px) {
+        .pg {
+          grid-row: auto;
+          width: 100%;
+          max-width: 400px;
+          margin: 0 auto;
+        }
+        .pg-lb {
+          padding: 72px 12px;
+        }
+        .pg-lb-prev,
+        .pg-lb-next {
+          top: auto;
+          bottom: 16px;
+          transform: none;
+        }
+      }
+      .proj-list {
+        display: flex;
+        flex-direction: column;
+        gap: 28px;
+      }
+      .proj {
+        display: grid;
+        grid-template-columns: 220px minmax(0, 1fr);
+        grid-template-rows: auto 1fr;
+        gap: 12px;
+      }
+      .proj-media {
+        grid-row: 1 / span 2;
+        aspect-ratio: 9/19;
+        align-self: start;
+        border-radius: 18px;
+        overflow: hidden;
+        border: 1px solid var(--border);
+        background: var(--base-200);
+        transition: border-color 0.25s;
+      }
+      .proj:hover .proj-media {
+        border-color: oklch(77.48% 0.204 60.62 / 0.35);
+      }
+      .proj-media img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: top;
+        display: block;
+      }
+      .proj-panel {
+        border-radius: 14px;
+        border: 1px solid var(--border);
+        background: var(--base-200);
+        padding: 18px 22px;
+        min-width: 0;
+      }
+      .proj-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 16px;
+      }
+      .proj-num {
+        display: block;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 11px;
+        color: var(--muted);
+        margin-bottom: 2px;
+      }
+      .proj-title {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 19px;
+        line-height: 1.3;
+        color: var(--primary);
+        text-wrap: balance;
+      }
+      .proj-arrow {
+        display: inline-block;
+        margin-left: 6px;
+        font-family: "DM Sans", sans-serif;
+        font-weight: 400;
+        transition: transform 0.2s;
+      }
+      .proj-title a:hover .proj-arrow {
+        transform: translate(2px, -2px);
+      }
+      .proj-repo {
+        color: var(--muted);
+        flex-shrink: 0;
+        transition: color 0.2s;
+      }
+      .proj-repo:hover {
+        color: var(--base-content);
+      }
+      .proj-body {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 18px;
+        padding: 22px;
+      }
+      .proj-desc {
+        font-size: 14px;
+        line-height: 1.75;
+        color: oklch(84.955% 0 0 / 0.65);
+        text-wrap: pretty;
+      }
+      @media (max-width: 1099px) {
+        .proj {
+          grid-template-columns: 150px minmax(0, 1fr);
+        }
+      }
+      @media (max-width: 767px) {
+        .proj {
+          grid-template-columns: 1fr;
+          grid-template-rows: auto;
+        }
+        .proj-media {
+          grid-row: auto;
+          aspect-ratio: 4/3;
+        }
       }
 
       /* ── Prose from marked.js ────────────────────────────────────── */
@@ -878,9 +1034,9 @@
               genuinely solves problems.
             </p>
             <p>
-              Fluent in Portuguese, English and Russian. When I'm not shipping,
-              you'll find me exploring new backend patterns or tinkering with
-              native mobile APIs.
+              Fluent in Portuguese, English, Spanish and Russian. When I'm not
+              shipping, you'll find me exploring new backend patterns or
+              tinkering with native mobile APIs.
             </p>
           </div>
 
@@ -1046,59 +1202,81 @@
           </template>
 
           <template x-if="projects.length > 0">
-            <div>
-              <!-- Main project card -->
-              <div
-                class="project-card"
-                :class="{'is-portrait': projects[activeProject].orientation === 'portrait'}"
-                style="user-select: none"
-                :style="dragging ? 'cursor:grabbing' : 'cursor:grab'"
-                @mousedown="dragStart = $event.clientX; dragging = true"
-                @mouseup="onDragEnd($event)"
-                @mouseleave="dragging && onDragEnd($event)"
-                @touchstart.passive="dragStart = $event.touches[0].clientX; dragging = true"
-                @touchend="onTouchEnd($event)"
-              >
-                <!-- Image -->
-                <div class="project-main-image-shell">
-                  <div class="project-main-image-frame">
-                    <img
-                      class="project-main-image"
-                      :src="projects[activeProject].image"
-                      :alt="projects[activeProject].title"
-                      loading="lazy"
-                    />
-                  </div>
-                </div>
+            <div class="proj-list">
+              <template x-for="(p, i) in projects" :key="p.title">
+                <article class="proj">
+                  <!-- Gallery (multiple screenshots) -->
+                  <template x-if="p.images && p.images.length">
+                    <div class="pg">
+                      <button
+                        class="pg-main"
+                        @click="openLb(p)"
+                        :aria-label="'Enlarge screenshot: ' + p.images[galIndex(p)].alt"
+                      >
+                        <img
+                          :src="p.images[galIndex(p)].src"
+                          :alt="p.images[galIndex(p)].alt"
+                        />
+                        <span
+                          class="pg-count"
+                          x-show="p.images.length > 1"
+                          x-text="(galIndex(p) + 1) + ' / ' + p.images.length"
+                        ></span>
+                        <span class="pg-zoom" aria-hidden="true">⤢</span>
+                      </button>
+                      <div
+                        class="pg-thumbs"
+                        role="tablist"
+                        x-show="p.images.length > 1"
+                        :style="'--n:' + (p.images.length > 6 ? 5 : Math.max(5, p.images.length))"
+                        :aria-label="p.title + ' screenshots'"
+                      >
+                        <template x-for="(m, j) in p.images" :key="m.src">
+                          <button
+                            class="pg-thumb"
+                            role="tab"
+                            :aria-selected="j === galIndex(p)"
+                            :aria-label="m.alt"
+                            @click="galSet(p, j)"
+                          >
+                            <img :src="m.src" alt="" loading="lazy" />
+                          </button>
+                        </template>
+                      </div>
+                    </div>
+                  </template>
+                  <!-- Single image -->
+                  <template x-if="!(p.images && p.images.length)">
+                    <div class="proj-media">
+                      <img :src="p.image" :alt="p.title" loading="lazy" />
+                    </div>
+                  </template>
 
-                <!-- Content -->
-                <div class="project-content" style="padding: 28px 32px">
-                  <div
-                    class="project-head"
-                    style="
-                      display: flex;
-                      justify-content: space-between;
-                      align-items: flex-start;
-                      margin-bottom: 12px;
-                    "
-                  >
-                    <span
-                      style="
-                        font-family: &quot;Syne&quot;, sans-serif;
-                        font-weight: 800;
-                        font-size: 20px;
-                        color: var(--primary);
-                      "
-                      x-text="projects[activeProject].title"
-                    ></span>
-                    <div style="display: flex; gap: 14px; color: var(--muted)">
+                  <div class="proj-panel proj-head">
+                    <div style="min-width: 0">
+                      <span
+                        class="proj-num"
+                        x-text="String(i + 1).padStart(2, '0')"
+                      ></span>
+                      <h3 class="proj-title">
+                        <template x-if="real(p.link)">
+                          <a :href="p.link" target="_blank" rel="noreferrer"
+                            ><span x-text="p.title"></span
+                            ><span class="proj-arrow">↗</span></a
+                          >
+                        </template>
+                        <template x-if="!real(p.link)"
+                          ><span x-text="p.title"></span
+                        ></template>
+                      </h3>
+                    </div>
+                    <template x-if="real(p.repo)">
                       <a
-                        x-show="projects[activeProject].repo"
-                        :href="projects[activeProject].repo"
-                        style="color: inherit; transition: color 0.2s"
-                        @mouseenter="$el.style.color='var(--base-content)'"
-                        @mouseleave="$el.style.color='var(--muted)'"
-                        aria-label="Repository"
+                        class="proj-repo"
+                        :href="p.repo"
+                        target="_blank"
+                        rel="noreferrer"
+                        aria-label="Source code"
                       >
                         <svg
                           width="20"
@@ -1111,47 +1289,13 @@
                           />
                         </svg>
                       </a>
-                      <a
-                        :href="projects[activeProject].link"
-                        style="color: inherit; transition: color 0.2s"
-                        @mouseenter="$el.style.color='var(--base-content)'"
-                        @mouseleave="$el.style.color='var(--muted)'"
-                        aria-label="Live link"
-                      >
-                        <svg
-                          width="20"
-                          height="20"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          stroke-width="2"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                        >
-                          <path
-                            d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"
-                          />
-                          <polyline points="15 3 21 3 21 9" />
-                          <line x1="10" y1="14" x2="21" y2="3" />
-                        </svg>
-                      </a>
-                    </div>
+                    </template>
                   </div>
-                  <div class="project-desc">
-                    <p
-                      style="
-                        font-size: 14px;
-                        line-height: 1.75;
-                        color: oklch(84.955% 0 0 / 0.65);
-                        margin-bottom: 20px;
-                      "
-                      x-text="projects[activeProject].body"
-                    ></p>
+
+                  <div class="proj-panel proj-body">
+                    <p class="proj-desc" x-text="p.body"></p>
                     <div style="display: flex; flex-wrap: wrap; gap: 7px">
-                      <template
-                        x-for="tag in projects[activeProject].tags"
-                        :key="tag"
-                      >
+                      <template x-for="tag in p.tags" :key="tag">
                         <span
                           class="tag"
                           :class="tagColor(tag)"
@@ -1160,151 +1304,58 @@
                       </template>
                     </div>
                   </div>
-                </div>
-              </div>
+                </article>
+              </template>
 
-              <!-- Carousel controls -->
-              <div
-                style="
-                  display: flex;
-                  align-items: center;
-                  justify-content: space-between;
-                  margin-top: 20px;
-                "
-              >
-                <!-- Dot indicators -->
-                <div style="display: flex; gap: 8px; align-items: center">
-                  <template x-for="(_, i) in projects" :key="i">
-                    <button
-                      @click="activeProject = i"
-                      style="
-                        height: 7px;
-                        border-radius: 999px;
-                        border: none;
-                        cursor: pointer;
-                        padding: 0;
-                        transition: all 0.3s;
-                      "
-                      :style="`width:${i===activeProject?'24px':'7px'};background:${i===activeProject?'var(--primary)':'oklch(84.955% 0 0 / 0.2)'}`"
-                      :aria-label="`Project ${i+1}`"
-                    ></button>
-                  </template>
-                </div>
-
-                <!-- Counter + arrows -->
-                <div style="display: flex; align-items: center; gap: 16px">
-                  <span
-                    style="
-                      font-family: &quot;JetBrains Mono&quot;, monospace;
-                      font-size: 12px;
-                      color: var(--muted);
-                    "
-                  >
-                    <span
-                      x-text="String(activeProject+1).padStart(2,'0')"
-                    ></span>
-                    /
-                    <span
-                      x-text="String(projects.length).padStart(2,'0')"
-                    ></span>
-                  </span>
-                  <div style="display: flex; gap: 8px">
-                    <button
-                      @click="prevProject()"
-                      style="
-                        width: 38px;
-                        height: 38px;
-                        border-radius: 50%;
-                        background: var(--base-200);
-                        border: 1px solid var(--border);
-                        color: var(--muted);
-                        cursor: pointer;
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        transition: all 0.2s;
-                      "
-                      @mouseenter="$el.style.borderColor='var(--primary)';$el.style.color='var(--primary)'"
-                      @mouseleave="$el.style.borderColor='var(--border)';$el.style.color='var(--muted)'"
-                      aria-label="Previous project"
-                    >
-                      <svg
-                        width="14"
-                        height="14"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        style="transform: rotate(180deg)"
-                      >
-                        <line x1="5" y1="12" x2="19" y2="12" />
-                        <polyline points="12 5 19 12 12 19" />
-                      </svg>
-                    </button>
-                    <button
-                      @click="nextProject()"
-                      style="
-                        width: 38px;
-                        height: 38px;
-                        border-radius: 50%;
-                        background: var(--base-200);
-                        border: 1px solid var(--border);
-                        color: var(--muted);
-                        cursor: pointer;
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        transition: all 0.2s;
-                      "
-                      @mouseenter="$el.style.borderColor='var(--primary)';$el.style.color='var(--primary)'"
-                      @mouseleave="$el.style.borderColor='var(--border)';$el.style.color='var(--muted)'"
-                      aria-label="Next project"
-                    >
-                      <svg
-                        width="14"
-                        height="14"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      >
-                        <line x1="5" y1="12" x2="19" y2="12" />
-                        <polyline points="12 5 19 12 12 19" />
-                      </svg>
-                    </button>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Thumbnail strip -->
-              <div class="project-thumbs" x-ref="projectThumbs">
-                <template x-for="(p, i) in projects" :key="i">
-                  <button
-                    class="project-thumb-btn"
-                    @click="setActiveProject(i)"
-                    :style="`border:1.5px solid ${i===activeProject?'var(--primary)':'var(--border)'};opacity:${i===activeProject?1:0.55}`"
-                    @mouseenter="if ($el !== undefined && i !== activeProject) $el.style.opacity = '0.85'"
-                    @mouseleave="if ($el !== undefined && i !== activeProject) $el.style.opacity = '0.55'"
-                    :aria-label="`Go to project: ${p.title}`"
-                  >
+              <!-- Lightbox -->
+              <template x-if="lb.open">
+                <div
+                  class="pg-lb"
+                  role="dialog"
+                  aria-modal="true"
+                  @click="closeLb()"
+                  @keydown.escape.window="closeLb()"
+                  @keydown.arrow-right.window="lbGo(1)"
+                  @keydown.arrow-left.window="lbGo(-1)"
+                >
+                  <figure @click.stop>
                     <img
-                      :src="p.image"
-                      :alt="p.title"
-                      style="
-                        width: 100%;
-                        height: 100%;
-                        object-fit: cover;
-                        pointer-events: none;
-                      "
-                      loading="lazy"
+                      :src="lb.p.images[lb.i].src"
+                      :alt="lb.p.images[lb.i].alt"
                     />
+                    <figcaption>
+                      <span x-text="lb.p.images[lb.i].alt"></span>
+                      <span
+                        class="pg-lb-n"
+                        x-text="(lb.i + 1) + ' / ' + lb.p.images.length"
+                      ></span>
+                    </figcaption>
+                  </figure>
+                  <button
+                    class="pg-lb-btn pg-lb-close"
+                    @click="closeLb()"
+                    aria-label="Close"
+                  >
+                    ✕
                   </button>
-                </template>
-              </div>
+                  <button
+                    class="pg-lb-btn pg-lb-prev"
+                    x-show="lb.p.images.length > 1"
+                    @click.stop="lbGo(-1)"
+                    aria-label="Previous screenshot"
+                  >
+                    ←
+                  </button>
+                  <button
+                    class="pg-lb-btn pg-lb-next"
+                    x-show="lb.p.images.length > 1"
+                    @click.stop="lbGo(1)"
+                    aria-label="Next screenshot"
+                  >
+                    →
+                  </button>
+                </div>
+              </template>
             </div>
           </template>
         </section>
@@ -1322,6 +1373,7 @@
           >
             <template x-for="group in skills" :key="group.category">
               <div
+                :style="group.wide ? { gridColumn: '1 / -1' } : {}"
                 style="
                   padding: 22px 24px;
                   border-radius: 12px;
@@ -1341,7 +1393,9 @@
                   "
                   x-text="group.category"
                 ></div>
-                <div style="display: flex; flex-direction: column; gap: 10px">
+                <div
+                  :style="group.wide ? 'display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px 24px' : 'display:flex;flex-direction:column;gap:10px'"
+                >
                   <template x-for="item in group.items" :key="item.label">
                     <div style="display: flex; align-items: center; gap: 10px">
                       <template x-if="item.icon">
@@ -1350,7 +1404,28 @@
                           :style="`font-size:18px;color:${iconColors[item.icon]||'var(--muted)'};width:20px;text-align:center;flex-shrink:0`"
                         ></i>
                       </template>
-                      <template x-if="!item.icon">
+                      <template x-if="!item.icon && item.img">
+                        <div
+                          style="
+                            width: 20px;
+                            display: flex;
+                            justify-content: center;
+                            flex-shrink: 0;
+                          "
+                        >
+                          <img
+                            :src="item.img"
+                            alt=""
+                            style="
+                              width: 18px;
+                              height: 18px;
+                              object-fit: contain;
+                              border-radius: 4px;
+                            "
+                          />
+                        </div>
+                      </template>
+                      <template x-if="!item.icon && !item.img">
                         <div
                           style="
                             width: 20px;
@@ -1494,10 +1569,9 @@
           experience: [],
           projects: [],
 
-          // ── Carousel ─────────────────────────────────────────────
-          activeProject: 0,
-          dragging: false,
-          dragStart: 0,
+          // ── Project galleries ────────────────────────────────────
+          gal: {},
+          lb: { open: false, p: null, i: 0 },
 
           // ── Skills (static — no markdown needed) ─────────────────
           skills: [
@@ -1509,7 +1583,12 @@
                 { label: "Android / Kotlin", icon: "devicon-kotlin-plain" },
                 { label: "Redux / Saga", icon: "devicon-redux-original" },
                 { label: "Expo", icon: "devicon-react-original" },
-                { label: "Detox", icon: null },
+                { label: "Detox", icon: null, img: "./assets/icons/detox.png" },
+                {
+                  label: "Mobilewright",
+                  icon: null,
+                  img: "./assets/icons/mobilewright.png",
+                },
               ],
             },
             {
@@ -1543,6 +1622,47 @@
                 { label: "AWS", icon: "devicon-amazonwebservices-plain" },
                 { label: "Webpack", icon: "devicon-webpack-plain" },
                 { label: "Gradle", icon: "devicon-gradle-plain" },
+                {
+                  label: "Playwright",
+                  icon: null,
+                  img: "./assets/icons/playwright.svg",
+                },
+              ],
+            },
+            {
+              category: "AI",
+              wide: true,
+              items: [
+                {
+                  label: "Pi (coding agent harness)",
+                  icon: null,
+                  img: "./assets/icons/pi.svg",
+                },
+                {
+                  label: "Claude models",
+                  icon: null,
+                  img: "./assets/icons/claude.svg",
+                },
+                {
+                  label: "Codex models",
+                  icon: null,
+                  img: "./assets/icons/openai.svg",
+                },
+                {
+                  label: "MCP (Model Context Protocol)",
+                  icon: null,
+                  img: "./assets/icons/mcp.svg",
+                },
+                {
+                  label: "Agent Skills",
+                  icon: null,
+                  img: "./assets/icons/agent-skills.svg",
+                },
+                {
+                  label: "OpenSpec",
+                  icon: null,
+                  img: "./assets/icons/openspec.svg",
+                },
               ],
             },
           ],
@@ -1623,7 +1743,8 @@
             const results = await Promise.all(
               files.map((f) => this.parseMarkdown(`./data/${type}/${f}`)),
             );
-            this[type] = results;
+            // Entries with "hidden: true" in their frontmatter are skipped
+            this[type] = results.filter((r) => r.hidden !== "true");
           },
 
           async parseMarkdown(path) {
@@ -1669,6 +1790,15 @@
                   .filter(Boolean)
               : [];
 
+            // Images: "src | alt; src | alt" → [{src, alt}]
+            if (data.images) {
+              data.images = data.images
+                .split(";")
+                .map((x) => x.split("|").map((t) => t.trim()))
+                .filter((x) => x[0])
+                .map(([src, alt]) => ({ src, alt: alt || data.title }));
+            }
+
             // Body: plain text (no markdown block elements in these short descriptions)
             data.body = body;
 
@@ -1697,48 +1827,29 @@
             window.scrollTo({ top: offset, behavior: "smooth" });
           },
 
-          setActiveProject(index) {
-            this.activeProject = index;
-            this.scrollActiveThumbnail();
+          real(u) {
+            return !!u && u !== "#";
           },
-
-          scrollActiveThumbnail() {
-            const strip = this.$refs.projectThumbs;
-            if (!strip) return;
-            const activeThumb = strip.children[this.activeProject];
-            if (!activeThumb) return;
-            activeThumb.scrollIntoView({
-              behavior: "smooth",
-              inline: "center",
-              block: "nearest",
-            });
+          galIndex(p) {
+            return this.gal[p.title] || 0;
           },
-
-          // ── Carousel ─────────────────────────────────────────────
-          prevProject() {
-            this.setActiveProject(
-              (this.activeProject - 1 + this.projects.length) %
-                this.projects.length,
-            );
+          galSet(p, i) {
+            this.gal[p.title] = i;
           },
-          nextProject() {
-            this.setActiveProject(
-              (this.activeProject + 1) % this.projects.length,
-            );
+          openLb(p) {
+            this.lb = { open: true, p, i: this.galIndex(p) };
+            document.body.style.overflow = "hidden";
           },
-          onDragEnd(e) {
-            if (!this.dragging) return;
-            this.dragging = false;
-            const diff = e.clientX - this.dragStart;
-            if (diff < -40) this.nextProject();
-            else if (diff > 40) this.prevProject();
+          closeLb() {
+            if (!this.lb.open) return;
+            this.galSet(this.lb.p, this.lb.i);
+            this.lb.open = false;
+            document.body.style.overflow = "";
           },
-          onTouchEnd(e) {
-            if (!this.dragging) return;
-            this.dragging = false;
-            const diff = e.changedTouches[0].clientX - this.dragStart;
-            if (diff < -40) this.nextProject();
-            else if (diff > 40) this.prevProject();
+          lbGo(d) {
+            if (!this.lb.open) return;
+            const n = this.lb.p.images.length;
+            this.lb.i = (this.lb.i + d + n) % n;
           },
         };
       }

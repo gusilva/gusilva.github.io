@@ -3,6 +3,7 @@ title: GraphQL Data Layer — Vitasoft
 image: ./assets/images/projects/graphql-vitasoft.svg
 link: "#"
 repo: https://github.com/gusilva
+hidden: true
 tags: GraphQL, Java, Spring Boot, Apache Solr, React
 ---
 
