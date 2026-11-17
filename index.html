@@ -31,6 +31,9 @@
     <!-- marked.js -->
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
+    <!-- Europass résumé PDF generator (pdfmake is lazy-loaded on click) -->
+    <script src="./assets/js/resume-pdf.js"></script>
+
     <script>
       // Tailwind theme — mirrors the existing CSS variable palette
       tailwind.config = {
@@ -1152,12 +1155,20 @@
           </div>
 
           <div style="margin-top: 24px; padding-left: 20px">
-            <a
-              href="#"
+            <button
+              type="button"
+              @click="downloadResume()"
+              :disabled="resume.busy"
+              :aria-busy="resume.busy ? 'true' : 'false'"
+              title="Download résumé as PDF (Europass format)"
               style="
                 display: inline-flex;
                 align-items: center;
                 gap: 6px;
+                background: none;
+                border: none;
+                padding: 0;
+                cursor: pointer;
                 font-family: &quot;Syne&quot;, sans-serif;
                 font-weight: 600;
                 font-size: 13px;
@@ -1165,10 +1176,14 @@
                 letter-spacing: 0.05em;
                 transition: gap 0.2s;
               "
+              :style="resume.busy ? { cursor: 'progress', opacity: 0.6 } : {}"
               @mouseenter="$el.style.gap='10px'"
               @mouseleave="$el.style.gap='6px'"
             >
-              View Full Résumé
+              <span
+                x-text="resume.busy ? 'Generating PDF…' : 'View Full Résumé'"
+                >View Full Résumé</span
+              >
               <svg
                 width="16"
                 height="16"
@@ -1183,7 +1198,13 @@
                 <line x1="5" y1="12" x2="19" y2="12" />
                 <polyline points="12 5 19 12 12 19" />
               </svg>
-            </a>
+            </button>
+            <p
+              x-show="resume.error"
+              x-text="resume.error"
+              role="alert"
+              style="margin-top: 8px; font-size: 12px; color: var(--muted)"
+            ></p>
           </div>
         </section>
 
@@ -1516,6 +1537,9 @@
     <!-- ── Alpine.js store ───────────────────────────────────────── -->
     <script>
       function portfolio() {
+        // Kept outside the reactive object: Alpine proxies break Promise#then.
+        let dataReady = Promise.resolve();
+
         return {
           // ── Nav ──────────────────────────────────────────────────
           navItems: ["About", "Experience", "Projects", "Skills"],
@@ -1568,6 +1592,7 @@
           // ── Data ─────────────────────────────────────────────────
           experience: [],
           projects: [],
+          resume: { busy: false, error: "" },
 
           // ── Project galleries ────────────────────────────────────
           gal: {},
@@ -1716,7 +1741,7 @@
               passive: true,
             });
             updateActiveSection(); // set correct item on initial load
-            await Promise.all([
+            dataReady = Promise.all([
               this.loadSection("experience", [
                 "00-osapiens.md",
                 "01-prosegur.md",
@@ -1737,6 +1762,7 @@
                 "08-doctor-consultations-app.md",
               ]),
             ]);
+            await dataReady;
           },
 
           async loadSection(type, files) {
@@ -1745,6 +1771,39 @@
             );
             // Entries with "hidden: true" in their frontmatter are skipped
             this[type] = results.filter((r) => r.hidden !== "true");
+          },
+
+          // ── Résumé PDF (Europass layout) ─────────────────────────
+          // Uses the same entries as the page ("hidden: true" ones are
+          // skipped); add "resume: false" to an entry's frontmatter to also
+          // leave it out of the PDF only.
+          async downloadResume() {
+            if (this.resume.busy) return;
+            this.resume.busy = true;
+            this.resume.error = "";
+            try {
+              const [profile] = await Promise.all([
+                this.parseMarkdown("./data/profile.md"),
+                dataReady,
+              ]);
+              const summary = Array.from(
+                document.querySelectorAll("#section-about p"),
+              ).map((p) => p.textContent);
+              const inResume = (e) => e.resume !== "false" && (e.title || e.role);
+              await window.ResumePdf.download({
+                profile,
+                summary,
+                experience: this.experience.filter(inResume),
+                projects: this.projects.filter(inResume),
+                skills: this.skills,
+              });
+            } catch (e) {
+              console.error("Failed to generate résumé PDF:", e);
+              this.resume.error =
+                "Sorry, the PDF could not be generated. Please try again.";
+            } finally {
+              this.resume.busy = false;
+            }
           },
 
           async parseMarkdown(path) {
